@@ -48,23 +48,13 @@ The route should:
 
 Never call the Notion API directly from browser JavaScript because that would expose the integration token.
 
-Set these deployment environment variables:
-
-```text
-NOTION_API_KEY=<your Notion integration secret>
-NOTION_LEARNING_DATA_SOURCE_ID=615b10c7-4074-403f-a837-7844e940ebb9
-```
+Set the required Notion token and roadmap data-source id as private deployment environment variables in your hosting provider.
 
 The Notion integration must be connected to the roadmap database in Notion. After that, marking a session `Complete`, changing `Progress`, or toggling `Website Visible` in Notion will be reflected on the website through the API.
 
 ## Local Development
 
-Use the Node dev server, not Python's static server. Create a local `.env` file:
-
-```text
-NOTION_API_KEY=your_notion_integration_secret
-NOTION_LEARNING_DATA_SOURCE_ID=615b10c7-4074-403f-a837-7844e940ebb9
-```
+Use the Node dev server, not Python's static server. Create a local `.env` file with the required Notion token and roadmap data-source id. Keep that file private; it is ignored by Git.
 
 Then run:
 

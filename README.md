@@ -20,12 +20,7 @@ Run the local Node server from this folder:
 npm run dev
 ```
 
-For live Notion sync, create a local `.env` file:
-
-```text
-NOTION_API_KEY=your_notion_integration_secret
-NOTION_LEARNING_DATA_SOURCE_ID=615b10c7-4074-403f-a837-7844e940ebb9
-```
+For live Notion sync, configure the required Notion token and roadmap data-source id in a local `.env` file. Keep `.env` private; it is ignored by Git.
 
 Then run:
 

@@ -32,14 +32,7 @@ For authenticated editing, database persistence, and server-side integrations:
 
 ## Environment Variables
 
-```text
-DATABASE_URL=
-AUTH_SECRET=
-GITHUB_TOKEN=
-OPENAI_API_KEY=
-OWNER_EMAIL=
-NEXT_PUBLIC_SITE_URL=
-```
+Configure secrets only inside your hosting provider's private environment-variable settings. Do not commit API keys, tokens, auth secrets, database URLs, owner emails, or site-specific deployment values into the repository.
 
 ## Performance Checklist
 
@@ -57,4 +50,3 @@ NEXT_PUBLIC_SITE_URL=
 - Create canonical URLs for blog posts.
 - Generate JSON-LD for `Person`, `CreativeWork`, and `BlogPosting`.
 - Keep project titles and summaries descriptive.
-
