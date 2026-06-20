@@ -5,7 +5,6 @@ const adminSessionKey = "portfolio-os-admin-session";
 const adminSessionDurationMs = 14 * 24 * 60 * 60 * 1000;
 const adminPin = "Pratik@123";
 const learningSyncSource = "/api/notion/learning-playlists";
-const accountUsageSource = "/api/openai/account-usage";
 const statisticsProjectTitles = [
   "Stock Market Volatility and Risk Dashboard",
   "Supply Chain Delay Analysis",
@@ -29,7 +28,6 @@ const navItems = [
 
 let data = loadData();
 let learningSyncState = { status: "idle", message: "Connecting to Notion..." };
-let accountUsageState = { status: "idle", message: "Checking account usage..." };
 let activeFilter = "All";
 let isAdmin = hasValidAdminSession();
 
@@ -275,56 +273,6 @@ function hydratePage(page) {
   drawCharts();
   if (page === "projects") bindProjectFilters();
   if (page === "dashboard") bindProgressForm();
-  if (page === "home") refreshAccountUsage();
-}
-
-async function refreshAccountUsage() {
-  if (accountUsageState.status === "syncing") return;
-  accountUsageState = { status: "syncing", message: "Syncing OpenAI usage..." };
-  updateTokenCardMessage();
-  try {
-    const separator = accountUsageSource.includes("?") ? "&" : "?";
-    const response = await fetch(`${accountUsageSource}${separator}t=${Date.now()}`, { cache: "no-store" });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok || payload.connected === false) {
-      accountUsageState = {
-        status: "error",
-        message: payload.note || payload.error || "OpenAI usage is not connected."
-      };
-      data.tokenUsage = { ...data.tokenUsage, ...payload, liveUsageConnected: false };
-      updateTokenCardMessage();
-      return;
-    }
-    data.tokenUsage = {
-      ...data.tokenUsage,
-      ...payload,
-      label: payload.dailyLimit ? "Daily API token usage" : "API token usage today"
-    };
-    accountUsageState = {
-      status: "ok",
-      message: payload.note || `Synced ${new Date(payload.lastUpdated).toLocaleTimeString()}`
-    };
-    replaceTokenCard();
-  } catch {
-    accountUsageState = {
-      status: "error",
-      message: "OpenAI usage endpoint is unavailable. Run the Node dev server with OPENAI_ADMIN_KEY."
-    };
-    updateTokenCardMessage();
-  }
-}
-
-function replaceTokenCard() {
-  const current = document.querySelector(".token-limit-card");
-  if (!current) return;
-  const wrapper = document.createElement("div");
-  wrapper.innerHTML = tokenLimitCard().trim();
-  current.replaceWith(wrapper.firstElementChild);
-}
-
-function updateTokenCardMessage() {
-  const node = document.querySelector("[data-token-usage-message]");
-  if (node) node.textContent = accountUsageState.message;
 }
 
 function heroVisual() {
@@ -376,7 +324,6 @@ function home() {
       ${heroVisual()}
     </section>
     <section class="stats-strip">${data.stats.map(statCard).join("")}</section>
-    ${tokenLimitCard()}
     <section class="two-col section">
       <div>
         <p class="eyebrow">Current Signal</p>
@@ -394,47 +341,6 @@ function home() {
     ${aiInsights()}
     ${latestProgress()}
   `;
-}
-
-function tokenLimitCard() {
-  const usage = data.tokenUsage || {};
-  const connected = usage.liveUsageConnected === true;
-  const limit = Number(usage.dailyLimit || 0);
-  const used = Math.max(0, Number(usage.usedToday || 0));
-  const remaining = Math.max(0, limit - used);
-  const hasUsage = connected && Number.isFinite(Number(usage.usedToday));
-  const hasLimit = hasUsage && limit > 0;
-  const percent = hasLimit ? Math.min(100, Math.round((used / limit) * 100)) : 0;
-  const status = hasLimit
-    ? (percent >= 90 ? "High usage" : percent >= 70 ? "Watch usage" : "Healthy")
-    : hasUsage ? "Usage synced" : "Subscription active";
-  const cost = usage.cost?.value != null
-    ? `${String(usage.cost.currency || "usd").toUpperCase()} ${Number(usage.cost.value || 0).toFixed(4)}`
-    : "Unavailable";
-  return `
-    <section class="token-limit-card section ${hasLimit ? "" : "not-connected"}" aria-label="Account subscription and token usage">
-      <div>
-        <p class="eyebrow">${usage.provider || "Account Usage"}</p>
-        <h2>${usage.label || "Account subscription status"}</h2>
-        <p>${hasUsage
-          ? "Live API usage is connected. Remaining and percent need a configured daily token limit."
-          : "Your plan can be shown here, but exact daily quota usage is not connected because the provider does not expose it to this local website."}</p>
-      </div>
-      <div class="token-meter">
-        <div class="token-meter-head">
-          <span>${status}</span>
-          <strong>${hasLimit ? `${percent}% used` : hasUsage ? `${formatNumber(used)} tokens` : usage.plan || "Pro"}</strong>
-        </div>
-        <div class="token-progress" style="--token-used:${percent}%"><i></i></div>
-        <div class="token-metrics">
-          <span><small>Used today</small><strong>${hasUsage ? formatNumber(used) : "Not connected"}</strong></span>
-          <span><small>Cost today</small><strong>${hasUsage ? cost : "Unavailable"}</strong></span>
-          <span><small>Requests</small><strong>${hasUsage ? formatNumber(usage.requests || 0) : "Unavailable"}</strong></span>
-          <span><small>${hasLimit ? "Remaining" : "Daily limit"}</small><strong>${hasLimit ? formatNumber(remaining) : "Not exposed"}</strong></span>
-        </div>
-        <p class="token-updated" data-token-usage-message>${accountUsageState.message || usage.lastUpdated || "Live account quota is not connected"}</p>
-      </div>
-    </section>`;
 }
 
 function now() {
@@ -909,7 +815,7 @@ function bindAdmin() {
   const collection = document.querySelector("#admin-collection");
   const json = document.querySelector("#admin-json");
   const visibilityControls = document.querySelector("#page-visibility-controls");
-  const editable = ["profile", "tokenUsage", "pageVisibility", "now", "education", "experience", "skills", "projects", "blogs", "roadmap", "learningPlaylists", "progress", "reading", "achievements"];
+  const editable = ["profile", "pageVisibility", "now", "education", "experience", "skills", "projects", "blogs", "roadmap", "learningPlaylists", "progress", "reading", "achievements"];
   collection.innerHTML = editable.map((key) => `<option>${key}</option>`).join("");
   const sync = () => json.value = JSON.stringify(data[collection.value], null, 2);
   const setAdminUi = (statusMessage) => {
@@ -1087,10 +993,6 @@ function formatCurrency(value) {
     maximumFractionDigits: value >= 1000 ? 0 : 2,
     minimumFractionDigits: value >= 1000 ? 0 : 2
   }).format(value);
-}
-
-function formatNumber(value) {
-  return new Intl.NumberFormat("en-IN").format(Number(value) || 0);
 }
 
 function formatSigned(value) {

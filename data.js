@@ -72,16 +72,6 @@ export const initialData = {
     { label: "Study streak", value: 46, suffix: " days" },
     { label: "Learning hours", value: 420, suffix: "+" }
   ],
-  tokenUsage: {
-    label: "Account subscription status",
-    provider: "Codex / OpenAI",
-    plan: "Pro",
-    liveUsageConnected: false,
-    dailyLimit: null,
-    usedToday: null,
-    resetTime: "Provider managed",
-    lastUpdated: "Live account quota is not exposed to this website yet"
-  },
   pageVisibility: {
     home: true,
     now: true,

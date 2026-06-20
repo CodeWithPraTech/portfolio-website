@@ -611,118 +611,6 @@ canvas[data-chart] {
   margin: 8px 0 0;
 }
 
-.token-limit-card {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(340px, 1.1fr);
-  gap: 20px;
-  align-items: center;
-  padding: 22px;
-  border: 1px solid rgba(36, 209, 167, 0.22);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(36, 209, 167, 0.1), transparent 42%),
-    linear-gradient(315deg, rgba(139, 125, 255, 0.1), transparent 48%),
-    rgba(255, 255, 255, 0.035);
-  box-shadow: var(--shadow);
-}
-
-.token-limit-card h2 {
-  margin: 0 0 10px;
-  font-size: clamp(24px, 3vw, 38px);
-}
-
-.token-limit-card p {
-  color: var(--muted);
-  margin: 0;
-  line-height: 1.65;
-}
-
-.token-meter {
-  display: grid;
-  gap: 14px;
-  min-width: 0;
-}
-
-.token-meter-head,
-.token-metrics {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.token-meter-head span {
-  color: var(--green);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.token-meter-head strong {
-  font-size: 24px;
-}
-
-.token-progress {
-  height: 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-  border: 1px solid var(--line);
-}
-
-.token-progress i {
-  display: block;
-  width: var(--token-used);
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--green), var(--violet), var(--gold));
-  box-shadow: 0 0 22px rgba(36, 209, 167, 0.28);
-}
-
-.token-limit-card.not-connected .token-progress i {
-  width: 100%;
-  background: linear-gradient(90deg, rgba(36, 209, 167, 0.42), rgba(139, 125, 255, 0.28));
-  opacity: 0.45;
-}
-
-.token-limit-card.not-connected .token-meter-head strong {
-  color: var(--green);
-}
-
-.token-metrics {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.token-metrics span {
-  min-width: 0;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(7, 9, 13, 0.36);
-}
-
-.token-metrics small {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.token-metrics strong {
-  display: block;
-  margin-top: 6px;
-  font-size: clamp(16px, 2vw, 23px);
-}
-
-.token-updated {
-  font-size: 12px;
-  text-align: right;
-}
-
 .two-col,
 .dashboard-grid,
 .resume-layout {
@@ -1821,7 +1709,6 @@ textarea {
 
   .hero,
   .two-col,
-  .token-limit-card,
   .dashboard-grid,
   .resume-layout,
   .project-card,
@@ -1830,7 +1717,6 @@ textarea {
   }
 
   .stats-strip,
-  .token-metrics,
   .feature-grid,
   .insight-grid,
   .skill-groups,
@@ -1860,7 +1746,6 @@ textarea {
 
   nav,
   .stats-strip,
-  .token-metrics,
   .feature-grid,
   .insight-grid,
   .skill-groups,
