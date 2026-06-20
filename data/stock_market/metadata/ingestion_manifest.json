@@ -1,0 +1,42 @@
+{
+  "source": "Yahoo Finance automated fallback for NSE tickers",
+  "source_note": "Use official NSE Security-wise Price Volume Archives and NIFTY historical index data as source-of-truth references. This script uses Yahoo Finance only as a real-data automated fallback when NSE blocks scripted downloads.",
+  "symbols": {
+    "RELIANCE": {
+      "ticker": "RELIANCE.NS",
+      "last_successful_date": "2026-06-10",
+      "last_fetch_timestamp": "2026-06-10T16:52:56.607802+00:00",
+      "source": "Yahoo Finance automated fallback"
+    },
+    "TCS": {
+      "ticker": "TCS.NS",
+      "last_successful_date": "2026-06-10",
+      "last_fetch_timestamp": "2026-06-10T16:52:56.607802+00:00",
+      "source": "Yahoo Finance automated fallback"
+    },
+    "HDFCBANK": {
+      "ticker": "HDFCBANK.NS",
+      "last_successful_date": "2026-06-10",
+      "last_fetch_timestamp": "2026-06-10T16:52:56.607802+00:00",
+      "source": "Yahoo Finance automated fallback"
+    },
+    "INFY": {
+      "ticker": "INFY.NS",
+      "last_successful_date": "2026-06-10",
+      "last_fetch_timestamp": "2026-06-10T16:52:56.607802+00:00",
+      "source": "Yahoo Finance automated fallback"
+    },
+    "ICICIBANK": {
+      "ticker": "ICICIBANK.NS",
+      "last_successful_date": "2026-06-10",
+      "last_fetch_timestamp": "2026-06-10T16:52:56.607802+00:00",
+      "source": "Yahoo Finance automated fallback"
+    },
+    "NIFTY50": {
+      "ticker": "^NSEI",
+      "last_successful_date": "2026-06-10",
+      "last_fetch_timestamp": "2026-06-10T16:52:56.607802+00:00",
+      "source": "Yahoo Finance automated fallback"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07090d" />
+    <meta
+      name="description"
+      content="A public operating system for a Data Scientist and Machine Learning Engineer: projects, learning logs, progress dashboard, research tracker, and business-facing AI solutions."
+    />
+    <meta property="og:title" content="Your Name - Data Scientist and ML Engineer" />
+    <meta
+      property="og:description"
+      content="A modern portfolio OS showing AI projects, daily progress, learning velocity, research, and business problem solving."
+    />
+    <meta property="og:type" content="website" />
+    <title>Your Name - Portfolio OS</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090d'/%3E%3Cpath d='M14 40h36M14 25h18m7 0h11' stroke='%23f5f7fb' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%2324d1a7'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="Portfolio OS home">
+          <span class="brand-mark">OS</span>
+          <span>
+            <strong data-owner-name>Your Name</strong>
+            <small>AI Builder</small>
+          </span>
+        </a>
+        <nav id="nav"></nav>
+        <div class="sidebar-card">
+          <span class="status-dot"></span>
+          <p>Building business-aware AI systems in public.</p>
+          <p class="admin-status" data-admin-status>Viewer mode</p>
+          <button class="ghost-button" data-open-admin>Owner Console</button>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div class="command">
+            <span>Search</span>
+            <input id="global-search" type="search" placeholder="projects, skills, logs..." aria-label="Search portfolio" />
+          </div>
+          <div class="topbar-actions">
+            <a class="icon-link" href="#now" data-page-link="now">Now</a>
+            <a class="icon-link" href="#resume" data-page-link="resume">Resume</a>
+            <button class="primary-button" data-open-admin>Update Site</button>
+          </div>
+        </header>
+
+        <div id="app" tabindex="-1"></div>
+      </main>
+    </div>
+
+    <dialog id="admin-dialog" class="admin-dialog">
+      <form method="dialog" class="dialog-head">
+        <div>
+          <p class="eyebrow">Owner Console</p>
+          <h2>Manage the portfolio OS</h2>
+        </div>
+        <button class="icon-button" aria-label="Close admin">x</button>
+      </form>
+      <div class="admin-grid">
+        <section class="admin-panel">
+          <label for="admin-pin">Admin Password</label>
+          <input id="admin-pin" type="password" placeholder="Enter admin password" />
+          <button class="primary-button" id="admin-login">Verify Admin</button>
+          <button class="ghost-button" id="admin-logout" type="button" hidden>Exit Admin Mode</button>
+          <p id="admin-message" class="admin-message" role="status"></p>
+          <p class="admin-status" data-admin-status>Viewer mode</p>
+          <p class="muted">Visitors can only view public pages. Verified admin can edit content and decide which pages are visible.</p>
+        </section>
+        <section class="admin-panel admin-editor" hidden>
+          <div class="field-row">
+            <label>Public Page Visibility</label>
+            <div id="page-visibility-controls" class="visibility-controls"></div>
+          </div>
+          <div class="field-row">
+            <label for="admin-collection">Collection</label>
+            <select id="admin-collection"></select>
+          </div>
+          <div class="field-row">
+            <label for="admin-json">JSON editor</label>
+            <textarea id="admin-json" spellcheck="false"></textarea>
+          </div>
+          <div class="button-row">
+            <button class="primary-button" id="admin-save" type="button">Save Changes</button>
+            <button class="ghost-button" id="admin-reset" type="button">Reset Sample Data</button>
+          </div>
+        </section>
+      </div>
+    </dialog>
+
+    <script type="module" src="data.js"></script>
+    <script type="module" src="app.js?v=20260607-sync3"></script>
+  </body>
+</html>

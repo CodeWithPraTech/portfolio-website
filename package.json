@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-os",
+  "version": "1.0.0",
+  "description": "A premium personal operating system for a Data Scientist and ML Engineer building and learning in public.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "check": "node --check app.js && node --check data.js && node --check server.mjs && node --check api/notion/learning-playlists.js && node --check lib/notion-learning-sync.js"
+  },
+  "keywords": [
+    "portfolio",
+    "data-science",
+    "machine-learning",
+    "build-in-public"
+  ],
+  "author": "Portfolio Owner",
+  "license": "MIT"
+}
