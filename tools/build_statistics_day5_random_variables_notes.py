@@ -294,6 +294,24 @@ def build_doc():
     add_formula(doc, "Continuous: E[X] = integral over x of x * f_X(x) dx")
     add_body(doc, "Expectation may not be a possible actual value. If expected purchases are 0.75, no individual customer makes 0.75 purchases. It means many similar customers average 0.75 purchases.")
 
+    add_heading(doc, "7.1 Law of the Unconscious Statistician", 2)
+    add_body(doc, "LOTUS lets you compute the expected value of a transformed random variable without first deriving the full distribution of the transformed variable. This is very useful in machine learning, risk modeling, and simulation.")
+    add_formula(doc, "Discrete: E[g(X)] = sum over x of g(x) * P(X = x)")
+    add_formula(doc, "Continuous: E[g(X)] = integral over x of g(x) * f_X(x) dx")
+    add_body(doc, "Example: if X is transaction loss and g(X)=min(X, cap), LOTUS gives the expected capped loss directly. In BFSI, this supports insurance caps, credit exposure limits, and fraud liability limits.")
+
+    add_heading(doc, "7.2 Expectation Properties You Must Know", 2)
+    add_formula(doc, "E[c] = c")
+    add_formula(doc, "E[cX] = cE[X]")
+    add_formula(doc, "E[X + Y] = E[X] + E[Y]")
+    add_formula(doc, "E[aX + bY + c] = aE[X] + bE[Y] + c")
+    add_body(doc, "The key interview point is that linearity of expectation does not require independence. Dependence matters for variance and covariance, but not for adding expected values.")
+
+    add_heading(doc, "7.3 Tail-Sum Formula for Non-Negative Integer Variables", 2)
+    add_body(doc, "For a non-negative integer-valued random variable, expectation can also be computed from survival probabilities.")
+    add_formula(doc, "E[X] = sum from k=1 to infinity of P(X >= k)")
+    add_body(doc, "Intuition: instead of weighting exact values, count how many thresholds the random variable crosses on average. This is useful for waiting-time problems, queue length, number of retries, and customer support attempts.")
+
     add_heading(doc, "8. Expectation Example: Purchases", 1)
     add_table(
         doc,
@@ -322,6 +340,13 @@ def build_doc():
     add_formula(doc, "E[I] = P(A)")
     add_body(doc, "This makes counting problems simple. If Xi = 1 when customer i defaults, then total defaults are X1 + X2 + ... + Xn. Expected total defaults are the sum of the default probabilities.")
 
+    add_heading(doc, "10.1 Indicator Method for Data Science", 2)
+    add_body(doc, "Many ML and analytics metrics are averages of indicator variables.")
+    add_formula(doc, "Accuracy = (1/n) * sum I(prediction_i = label_i)")
+    add_formula(doc, "Conversion rate = (1/n) * sum I(user_i converted)")
+    add_formula(doc, "Default rate = (1/n) * sum I(customer_i defaulted)")
+    add_body(doc, "This is why expected value is directly connected to dashboard metrics. A rate is often the sample average of 0/1 random variables, and the expected rate is the underlying probability.")
+
     add_heading(doc, "11. BFSI Applications", 1)
     add_table(
         doc,
@@ -347,6 +372,17 @@ def build_doc():
         "Recommendation reward is a random variable: click, purchase, retention, or revenue.",
         "Expected value is the bridge between probability theory and optimization objectives.",
     ])
+
+    add_heading(doc, "12.1 From Population Expectation to Sample Average", 2)
+    add_body(doc, "Research work constantly moves between theoretical expectation and observed sample averages.")
+    add_formula(doc, "Population risk: R(f) = E[L(Y, f(X))]")
+    add_formula(doc, "Empirical risk: R_hat(f) = (1/n) * sum from i=1 to n of L(y_i, f(x_i))")
+    add_body(doc, "Training minimizes empirical risk because the true population distribution is unknown. Generalization asks whether empirical risk is a good estimate of population risk.")
+
+    add_heading(doc, "12.2 Monte Carlo Estimation", 2)
+    add_body(doc, "When expectation is hard to compute analytically, simulate samples and average the result.")
+    add_formula(doc, "E[g(X)] approximately equals (1/n) * sum from i=1 to n of g(x_i)")
+    add_body(doc, "This appears in model evaluation, uncertainty estimation, bootstrapping, risk simulations, pricing, and reinforcement learning.")
 
     add_heading(doc, "13. Interview Traps", 1)
     add_bullets(doc, [
