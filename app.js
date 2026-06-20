@@ -289,7 +289,7 @@ async function refreshAccountUsage() {
     if (!response.ok || payload.connected === false) {
       accountUsageState = {
         status: "error",
-        message: payload.error || payload.note || "OpenAI usage is not connected."
+        message: payload.note || payload.error || "OpenAI usage is not connected."
       };
       data.tokenUsage = { ...data.tokenUsage, ...payload, liveUsageConnected: false };
       updateTokenCardMessage();

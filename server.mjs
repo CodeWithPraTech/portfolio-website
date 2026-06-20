@@ -125,11 +125,14 @@ async function handleOpenAiUsage(response) {
         : "OpenAI usage API returned tokens/costs. Add OPENAI_DAILY_TOKEN_LIMIT to calculate remaining and percent."
     });
   } catch (error) {
+    const permissionMessage = error.statusCode === 403
+      ? "The configured OpenAI key is valid for model calls but does not have organization usage-read permission."
+      : error.message || "Unable to fetch OpenAI usage";
     sendJson(response, error.statusCode || 500, {
       connected: false,
       provider: "OpenAI API",
       plan: "Pro",
-      error: error.message || "Unable to fetch OpenAI usage",
+      error: permissionMessage,
       note: "OpenAI organization usage requires an Admin API key with usage read permission. ChatGPT Pro message limits are not exposed by this API."
     });
   }
