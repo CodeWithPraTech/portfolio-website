@@ -193,7 +193,7 @@ async function archiveExistingRows(sourceId) {
   for (const page of existing) {
     await notionFetch(`/pages/${page.id}`, {
       method: "PATCH",
-      body: JSON.stringify({ archived: true })
+      body: JSON.stringify({ in_trash: true })
     });
   }
 }
@@ -261,6 +261,9 @@ async function createSessionPage(sourceId, session) {
 }
 
 function pageBlocks(session) {
+  const projectBullets = [session.project1Task, session.project2Task, session.project3Task]
+    .filter(Boolean)
+    .map((task) => bullet(task));
   return [
     heading("Daily Completion Checklist"),
     bullet(`Theory: ${session.chapterSection}`),
@@ -270,9 +273,7 @@ function pageBlocks(session) {
     bullet(`Python hard / mini project: ${session.pythonHard}`),
     bullet(`DSA: ${session.dsaProblem}`),
     heading("Project Updates"),
-    bullet(session.project1Task),
-    bullet(session.project2Task),
-    bullet(session.project3Task),
+    ...projectBullets,
     heading("Interview Output"),
     paragraph(session.interviewOutput),
     heading("Notes Section"),

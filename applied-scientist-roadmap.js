@@ -71,6 +71,19 @@ function sessionTypeFor(index, phase) {
   return "Core";
 }
 
+function activeProjectFor(index) {
+  const day = index + 1;
+  if (day <= 15) return ["p1", "p2", "p3"][index % 3];
+  if (day <= 25) return ["p1", "p2", "p3"][(day - 16) % 3];
+  if (day <= 36) return day % 2 === 0 ? "p2" : "p3";
+  if (day <= 43) return "p3";
+  return day === 44 ? "p1" : "p2";
+}
+
+function projectField(projectKey, prefix, task) {
+  return projectKey ? `${prefix}${task}.` : "";
+}
+
 export const appliedScientistSessions = rows.map((row, index) => {
   const [
     primaryTopic,
@@ -90,6 +103,7 @@ export const appliedScientistSessions = rows.map((row, index) => {
     interviewOutput
   ] = row;
   const date = isoDateAfter(startDate, index);
+  const activeProject = activeProjectFor(index);
   return {
     day: `Day ${String(index + 1).padStart(2, "0")}`,
     date,
@@ -113,9 +127,9 @@ export const appliedScientistSessions = rows.map((row, index) => {
     pythonHard,
     dsaTopic,
     dsaProblem,
-    project1Task: `${projectTasks.p1}${p1}.`,
-    project2Task: `${projectTasks.p2}${p2}.`,
-    project3Task: `${projectTasks.p3}${p3}.`,
+    project1Task: projectField(activeProject === "p1", projectTasks.p1, p1),
+    project2Task: projectField(activeProject === "p2", projectTasks.p2, p2),
+    project3Task: projectField(activeProject === "p3", projectTasks.p3, p3),
     interviewOutput,
     practiceQuestions: `${pythonEasy} ${pythonMedium} ${pythonHard}`,
     tasks: `${derivationTask} ${pythonEasy} ${pythonMedium} ${pythonHard} DSA: ${dsaProblem}`,
