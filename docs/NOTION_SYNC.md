@@ -29,6 +29,16 @@ The roadmap includes 40 learning sessions plus 5 weekly revision sessions. Each 
 
 Future playlists can be added by creating another Notion database with the same schema, then adding another item to `learningPlaylists` and the API response.
 
+The site now includes a second Notion-backed playlist:
+
+```text
+45-Day Applied Scientist Prep Roadmap
+https://app.notion.com/p/7b8c13855ad04e9c9865e4916e042503
+collection://bd7b9097-7e0d-439e-a8b8-05fdab9140a6
+```
+
+This playlist tracks Applied Scientist / Research Engineer / Data Scientist interview preparation with textbook references, derivations, Python easy/medium/hard tasks, DSA tasks, and three project lanes.
+
 ## Live Production Sync
 
 The repo includes this server route:
@@ -49,6 +59,13 @@ The route should:
 Never call the Notion API directly from browser JavaScript because that would expose the integration token.
 
 Set the required Notion token and roadmap data-source id as private deployment environment variables in your hosting provider.
+
+For the Applied Scientist playlist, also set:
+
+```text
+NOTION_APPLIED_SCIENTIST_DATA_SOURCE_ID=bd7b9097-7e0d-439e-a8b8-05fdab9140a6
+NOTION_APPLIED_SCIENTIST_DATABASE_URL=https://app.notion.com/p/7b8c13855ad04e9c9865e4916e042503
+```
 
 The Notion integration must be connected to the roadmap database in Notion. After that, marking a session `Complete`, changing `Progress`, or toggling `Website Visible` in Notion will be reflected on the website through the API.
 

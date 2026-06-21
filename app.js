@@ -42,14 +42,15 @@ function loadData() {
   try {
     const parsed = JSON.parse(saved);
     const merged = { ...structuredClone(initialData), ...parsed };
-    const currentStatisticsPlaylist = initialData.learningPlaylists?.[0];
-    const savedStatisticsPlaylist = parsed.learningPlaylists?.[0];
+    const seededPlaylists = initialData.learningPlaylists || [];
+    const savedPlaylists = parsed.learningPlaylists || [];
 
-    if (currentStatisticsPlaylist) {
-      const savedExtraPlaylists = savedStatisticsPlaylist?.id === currentStatisticsPlaylist.id
-        ? (parsed.learningPlaylists || []).slice(1)
-        : (parsed.learningPlaylists || []);
-      merged.learningPlaylists = [currentStatisticsPlaylist, ...savedExtraPlaylists];
+    if (seededPlaylists.length) {
+      const savedById = new Map(savedPlaylists.map((playlist) => [playlist.id, playlist]));
+      const seededIds = new Set(seededPlaylists.map((playlist) => playlist.id));
+      const mergedSeeded = seededPlaylists.map((playlist) => ({ ...playlist, ...(savedById.get(playlist.id) || {}), days: playlist.days }));
+      const savedExtraPlaylists = savedPlaylists.filter((playlist) => !seededIds.has(playlist.id));
+      merged.learningPlaylists = [...mergedSeeded, ...savedExtraPlaylists];
     }
 
     const savedProjects = parsed.projects || [];
@@ -446,8 +447,10 @@ function projects() {
 
 function learning() {
   const playlists = getLearningPlaylists();
-  const activePlaylist = playlists[0];
-  const visibleDays = activePlaylist.days.filter((day) => day.visible !== false);
+  const activePlaylistId = routeParam("playlist") || playlists[0]?.id;
+  const activePlaylist = playlists.find((playlist) => playlist.id === activePlaylistId) || playlists[0];
+  if (!activePlaylist) return `<section class="section page-head"><p class="eyebrow">Learning Progress</p><h1>No learning playlists available.</h1></section>`;
+  const visibleDays = (activePlaylist.days || []).filter((day) => day.visible !== false);
   const pending = visibleDays.filter((day) => normalizeStatus(day.status) === "pending").length;
   const inProgress = visibleDays.filter((day) => normalizeStatus(day.status) === "in progress").length;
   const completed = visibleDays.filter((day) => normalizeStatus(day.status) === "complete").length;
@@ -463,17 +466,17 @@ function learning() {
       </div>
     </section>
     <section class="playlist-grid">
-      ${playlists.map((playlist, index) => {
-        const playlistDays = playlist.days.filter((day) => day.visible !== false);
+      ${playlists.map((playlist) => {
+        const playlistDays = (playlist.days || []).filter((day) => day.visible !== false);
         const playlistProgress = Math.round(sum(playlistDays.map(sessionProgress)) / Math.max(playlistDays.length, 1));
         return `
-          <article class="playlist-card ${index === 0 ? "active" : ""}">
+          <a class="playlist-card ${playlist.id === activePlaylist.id ? "active" : ""}" href="#learning?playlist=${encodeURIComponent(playlist.id)}">
             <p class="eyebrow">${playlist.category || "Study Playlist"}</p>
             <h2>${playlist.title}</h2>
             <p>${playlist.description}</p>
             ${progressLine("Average progress", playlistProgress)}
             <div class="tags"><span>${playlistDays.length} sessions</span><span>${playlist.status}</span></div>
-          </article>`;
+          </a>`;
       }).join("")}
     </section>
     <section class="stats-strip">
@@ -500,19 +503,37 @@ function learning() {
             <h3>${day.day}</h3>
             <span class="status-badge ${normalizeStatus(day.status).replaceAll(" ", "-")}">${day.status}</span>
           </div>
-          <div class="tags compact-tags"><span>${day.sessionType || "Core"}</span><span>${day.week || "Week"}</span><span>${formatDate(day.date)}</span></div>
-          <h2>${day.focusArea}</h2>
+          <div class="tags compact-tags"><span>${day.sessionType || "Core"}</span><span>${day.phase || day.week || "Week"}</span><span>${day.week || "Week"}</span><span>${formatDate(day.date)}</span></div>
+          <h2>${day.primaryTopic || day.focusArea}</h2>
           ${progressLine("Progress", sessionProgress(day))}
-          <dl class="session-details">
-            <dt>Reminder</dt><dd>${day.reminderDate ? formatDate(day.reminderDate) : "Set in Notion"}</dd>
-            <dt>Resources</dt><dd>${day.resources || "Reference to be added"}</dd>
-            <dt>Important concepts</dt><dd>${day.importantConcepts || "Concepts to be added"}</dd>
-            <dt>Practice</dt><dd>${day.practiceQuestions || day.tasks}</dd>
-            <dt>Notes</dt><dd>${day.notesUpload ? `<a href="${day.notesUpload}" target="_blank" rel="noreferrer">Open uploaded notes</a>` : "Upload notes in Notion after completing this topic."}</dd>
-          </dl>
+          ${learningSessionDetails(day)}
           <p>${day.tasks}</p>
         </article>`).join("")}
     </section>`;
+}
+
+function learningSessionDetails(day) {
+  const details = [
+    ["Reminder", day.reminderDate ? formatDate(day.reminderDate) : "Set in Notion"],
+    ["Book", day.bookReference || day.resources || "Reference to be added"],
+    ["Chapter / Section", day.chapterSection],
+    ["Page Range", day.pageRange],
+    ["Page Confidence", day.pageReferenceConfidence],
+    ["Important concepts", day.importantConcepts || "Concepts to be added"],
+    ["Derivation", day.derivationTask],
+    ["Python Easy", day.pythonEasy],
+    ["Python Medium", day.pythonMedium],
+    ["Python Hard", day.pythonHard],
+    ["DSA", [day.dsaTopic, day.dsaProblem].filter(Boolean).join(" - ")],
+    ["Project 1", day.project1Task],
+    ["Project 2", day.project2Task],
+    ["Project 3", day.project3Task],
+    ["Interview Output", day.interviewOutput],
+    ["Practice", day.practiceQuestions || day.tasks],
+    ["Notes", day.notesUpload ? `<a href="${day.notesUpload}" target="_blank" rel="noreferrer">Open uploaded notes</a>` : "Upload notes in Notion after completing this topic."]
+  ].filter(([, value]) => value);
+
+  return `<dl class="session-details">${details.map(([label, value]) => `<dt>${label}</dt><dd>${value}</dd>`).join("")}</dl>`;
 }
 
 function dashboard() {

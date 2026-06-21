@@ -1,3 +1,5 @@
+import { appliedScientistPlaylist } from "./applied-scientist-roadmap.js";
+
 const statisticsSessions = [
   { day: "Day 01", date: "2026-06-07", reminderDate: "2026-06-07", week: "Week 1", sessionType: "Core", status: "Pending", progress: 0, focusArea: "Descriptive Statistics and EDA", topics: ["Descriptive Statistics"], resources: "PSDS Ch. 1; OpenIntro review sections", importantConcepts: "Data types, mean, median, mode, variance, standard deviation, IQR, percentiles, outliers, robust summaries.", practiceQuestions: "Summarize one business dataset; compare mean vs median; identify outliers and explain business impact.", tasks: "Read PSDS EDA sections, work 5 summary-stat examples, write interview notes on robust statistics.", hours: 1.5, notes: "Upload handwritten/formula notes here after completion.", notesUpload: "", visible: true },
   { day: "Day 02", date: "2026-06-08", reminderDate: "2026-06-08", week: "Week 1", sessionType: "Core", status: "Pending", progress: 0, focusArea: "Probability Basics and Counting", topics: ["Probability"], resources: "BH Ch. 1; selected counting examples", importantConcepts: "Sample spaces, events, complements, union/intersection, multiplication rule, permutations, combinations.", practiceQuestions: "Solve 10 counting and probability drills; explain why each denominator is correct.", tasks: "Read BH counting basics, solve interview-style card/dice/arrangement problems.", hours: 1.5, notes: "Upload probability drill notes here.", notesUpload: "", visible: true },
@@ -106,7 +108,8 @@ export const initialData = {
       description:
         "A 45-session tracker covering 40 MAANG/BFSI statistics sessions plus 5 weekly revision sessions, with references, concepts, practice tasks, reminders, and note upload support in Notion.",
       days: statisticsSessions
-    }
+    },
+    appliedScientistPlaylist
   ],
   education: [
     {
