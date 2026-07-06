@@ -59,14 +59,16 @@ function loadData() {
       const hasBusinessSprintLink = title !== "Stock Market Volatility and Risk Dashboard"
         || project?.phases?.some((phase) => phase.name === "Business Understanding" && phase.link);
       const hasDataSprintLink = title !== "Stock Market Volatility and Risk Dashboard"
-        || project?.phases?.some((phase) => phase.name === "Data" && phase.link && phase.status === "In Progress");
+        || project?.phases?.some((phase) => phase.name === "Data" && phase.link && phase.status === "Complete");
+      const hasAnalyticsInProgress = title !== "Stock Market Volatility and Risk Dashboard"
+        || project?.phases?.some((phase) => phase.name === "Analytics" && phase.status === "In Progress");
       const hasProductConsole = title !== "Stock Market Volatility and Risk Dashboard"
         || Boolean(project?.product?.stocks?.length && project?.product?.featureRoadmap?.length);
       const hasCandlestickDetail = title !== "Stock Market Volatility and Risk Dashboard"
         || project?.product?.featureRoadmap?.some((feature) => feature.name === "Candlestick Detail" && feature.status === "Complete");
       const hasProjectWebsite = title !== "Stock Market Volatility and Risk Dashboard"
         || Boolean(project?.product?.siteUrl);
-      return project?.roadmapStage === "Statistics" && hasBusinessSprintLink && hasDataSprintLink && hasProductConsole && hasCandlestickDetail && hasProjectWebsite;
+      return project?.roadmapStage === "Statistics" && hasBusinessSprintLink && hasDataSprintLink && hasAnalyticsInProgress && hasProductConsole && hasCandlestickDetail && hasProjectWebsite;
     });
 
     if (!statisticsProjectsReady) {

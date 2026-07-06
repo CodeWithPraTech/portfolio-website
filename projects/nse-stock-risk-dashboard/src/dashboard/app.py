@@ -8,12 +8,16 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import json
 import urllib.parse
+import sys
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SITE_ROOT = PROJECT_ROOT / "site"
 DATA_ROOT = PROJECT_ROOT / "data"
 PORT = 4184
+sys.path.append(str(PROJECT_ROOT))
+
+from src.pipeline.run_etl import run_etl  # noqa: E402
 
 
 class DashboardHandler(SimpleHTTPRequestHandler):
@@ -34,6 +38,11 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                 "project": "nse-stock-risk-dashboard",
                 "data_root": str(DATA_ROOT),
             })
+            return
+        if self.path.startswith("/api/dashboard-summary"):
+            query = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            lookback = "1y" if query.get("lookback", ["6mo"])[0] == "1y" else "6mo"
+            self.send_json(run_etl(lookback))
             return
         super().do_GET()
 

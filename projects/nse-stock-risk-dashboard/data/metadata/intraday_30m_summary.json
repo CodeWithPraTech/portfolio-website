@@ -1,0 +1,102 @@
+{
+  "status": "ok",
+  "interval": "30m",
+  "requestedDays": 30,
+  "refreshedAt": "2026-07-06T07:20:47.556797+00:00",
+  "rowsFetched": 1536,
+  "fetchedRows": {
+    "RELIANCE": 256,
+    "TCS": 256,
+    "HDFCBANK": 256,
+    "INFY": 256,
+    "ICICIBANK": 256,
+    "NIFTY50": 256
+  },
+  "databaseRunId": 4,
+  "databasePath": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\database\\market_data.db",
+  "databaseRows": 746,
+  "databaseIntradayRows": 1536,
+  "databaseSymbols": 6,
+  "databaseLatestDate": "2026-07-06",
+  "databaseLatestIntraday": "2026-07-06T07:20:53+00:00",
+  "latest": [
+    {
+      "symbol": "HDFCBANK",
+      "name": "HDFC Bank",
+      "sector": "Financial Services",
+      "industry": "Private Sector Bank",
+      "interval_start": "2026-07-06T07:20:48+00:00",
+      "interval_minutes": 30,
+      "open": 827.2999877929688,
+      "high": 827.2999877929688,
+      "low": 827.2999877929688,
+      "close": 827.2999877929688,
+      "volume": 0
+    },
+    {
+      "symbol": "ICICIBANK",
+      "name": "ICICI Bank",
+      "sector": "Financial Services",
+      "industry": "Private Sector Bank",
+      "interval_start": "2026-07-06T07:20:51+00:00",
+      "interval_minutes": 30,
+      "open": 1427.800048828125,
+      "high": 1427.800048828125,
+      "low": 1427.800048828125,
+      "close": 1427.800048828125,
+      "volume": 0
+    },
+    {
+      "symbol": "INFY",
+      "name": "Infosys",
+      "sector": "Information Technology",
+      "industry": "IT Services & Consulting",
+      "interval_start": "2026-07-06T07:20:49+00:00",
+      "interval_minutes": 30,
+      "open": 1035.800048828125,
+      "high": 1035.800048828125,
+      "low": 1035.800048828125,
+      "close": 1035.800048828125,
+      "volume": 0
+    },
+    {
+      "symbol": "NIFTY50",
+      "name": "NIFTY 50 Benchmark",
+      "sector": "Broad Market Index",
+      "industry": "Benchmark Index",
+      "interval_start": "2026-07-06T07:20:53+00:00",
+      "interval_minutes": 30,
+      "open": 24441.650390625,
+      "high": 24441.650390625,
+      "low": 24441.650390625,
+      "close": 24441.650390625,
+      "volume": 0
+    },
+    {
+      "symbol": "RELIANCE",
+      "name": "Reliance Industries",
+      "sector": "Oil, Gas & Consumable Fuels",
+      "industry": "Integrated Oil & Gas",
+      "interval_start": "2026-07-06T07:20:47+00:00",
+      "interval_minutes": 30,
+      "open": 1322.5999755859375,
+      "high": 1322.5999755859375,
+      "low": 1322.5999755859375,
+      "close": 1322.5999755859375,
+      "volume": 0
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "sector": "Information Technology",
+      "industry": "IT Services & Consulting",
+      "interval_start": "2026-07-06T07:20:47+00:00",
+      "interval_minutes": 30,
+      "open": 2061.699951171875,
+      "high": 2061.699951171875,
+      "low": 2061.699951171875,
+      "close": 2061.699951171875,
+      "volume": 0
+    }
+  ]
+}

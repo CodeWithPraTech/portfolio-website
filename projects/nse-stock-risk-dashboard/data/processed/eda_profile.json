@@ -1,0 +1,490 @@
+{
+  "generatedAt": "2026-07-06T08:42:52.289938+00:00",
+  "database": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\database\\market_data.db",
+  "daily": {
+    "rows": 12694,
+    "symbols": 51,
+    "startDate": "2025-07-07",
+    "endDate": "2026-07-06",
+    "duplicateRows": 0,
+    "invalidOhlcRows": 0,
+    "missingValues": {
+      "return_1d": 51
+    },
+    "adjustedRows": 7506
+  },
+  "intraday": {
+    "rows": 1536,
+    "symbols": 6,
+    "startInterval": "2026-06-08T03:45:00+00:00",
+    "endInterval": "2026-07-06T07:20:53+00:00",
+    "intervalMinutes": [
+      30
+    ]
+  },
+  "corporateActions": {
+    "rows": 81,
+    "byType": {
+      "dividend": 76,
+      "split": 5
+    }
+  },
+  "topReturns": [
+    {
+      "symbol": "SHRIRAMFIN",
+      "name": "Shriram Finance Ltd.",
+      "sector": "Financial Services",
+      "one_year_return": 0.6147934864,
+      "annualized_volatility": 0.350858961,
+      "max_drawdown": -0.2104834582
+    },
+    {
+      "symbol": "HINDALCO",
+      "name": "Hindalco Industries Ltd.",
+      "sector": "Metals & Mining",
+      "one_year_return": 0.4202515028,
+      "annualized_volatility": 0.2776901143,
+      "max_drawdown": -0.1826562998
+    },
+    {
+      "symbol": "EICHERMOT",
+      "name": "Eicher Motors Ltd.",
+      "sector": "Automobile and Auto Components",
+      "one_year_return": 0.3272402055,
+      "annualized_volatility": 0.2669825311,
+      "max_drawdown": -0.1958485958
+    },
+    {
+      "symbol": "SBIN",
+      "name": "State Bank of India",
+      "sector": "Financial Services",
+      "one_year_return": 0.3181269872,
+      "annualized_volatility": 0.2243873397,
+      "max_drawdown": -0.2211005229
+    },
+    {
+      "symbol": "ADANIPORTS",
+      "name": "Adani Ports and Special Economic Zone Ltd.",
+      "sector": "Services",
+      "one_year_return": 0.311508615,
+      "annualized_volatility": 0.2709707173,
+      "max_drawdown": -0.1697873269
+    },
+    {
+      "symbol": "ADANIENT",
+      "name": "Adani Enterprises Ltd.",
+      "sector": "Metals & Mining",
+      "one_year_return": 0.2458111746,
+      "annualized_volatility": 0.3471578419,
+      "max_drawdown": -0.3428485709
+    },
+    {
+      "symbol": "TITAN",
+      "name": "Titan Company Ltd.",
+      "sector": "Consumer Durables",
+      "one_year_return": 0.2259582174,
+      "annualized_volatility": 0.2366950918,
+      "max_drawdown": -0.1127204875
+    },
+    {
+      "symbol": "NESTLEIND",
+      "name": "Nestle India Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "one_year_return": 0.2165574461,
+      "annualized_volatility": 0.2068522719,
+      "max_drawdown": -0.1195589037
+    },
+    {
+      "symbol": "COALINDIA",
+      "name": "Coal India Ltd.",
+      "sector": "Oil Gas & Consumable Fuels",
+      "one_year_return": 0.2150084559,
+      "annualized_volatility": 0.223093466,
+      "max_drawdown": -0.102687804
+    },
+    {
+      "symbol": "BAJAJ-AUTO",
+      "name": "Bajaj Auto Ltd.",
+      "sector": "Automobile and Auto Components",
+      "one_year_return": 0.1961954748,
+      "annualized_volatility": 0.2231043748,
+      "max_drawdown": -0.1336795519
+    }
+  ],
+  "bottomReturns": [
+    {
+      "symbol": "TMPV",
+      "name": "Tata Motors Passenger Vehicles Ltd.",
+      "sector": "Automobile and Auto Components",
+      "one_year_return": -0.4925223351,
+      "annualized_volatility": 0.5079549676,
+      "max_drawdown": -0.5883252126
+    },
+    {
+      "symbol": "TRENT",
+      "name": "Trent Ltd.",
+      "sector": "Consumer Services",
+      "one_year_return": -0.3904262523,
+      "annualized_volatility": 0.4552874652,
+      "max_drawdown": -0.6026044418
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3721318629,
+      "annualized_volatility": 0.2571949069,
+      "max_drawdown": -0.3960158402
+    },
+    {
+      "symbol": "INFY",
+      "name": "Infosys Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3399535821,
+      "annualized_volatility": 0.2867886215,
+      "max_drawdown": -0.4042956209
+    },
+    {
+      "symbol": "WIPRO",
+      "name": "Wipro Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3210701952,
+      "annualized_volatility": 0.2526915102,
+      "max_drawdown": -0.3599503834
+    },
+    {
+      "symbol": "HCLTECH",
+      "name": "HCL Technologies Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3065894957,
+      "annualized_volatility": 0.2693345116,
+      "max_drawdown": -0.3906107705
+    },
+    {
+      "symbol": "HDFCLIFE",
+      "name": "HDFC Life Insurance Company Ltd.",
+      "sector": "Financial Services",
+      "one_year_return": -0.2791550829,
+      "annualized_volatility": 0.2130907409,
+      "max_drawdown": -0.3154855546
+    },
+    {
+      "symbol": "ITC",
+      "name": "ITC Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "one_year_return": -0.2707866379,
+      "annualized_volatility": 0.1914484704,
+      "max_drawdown": -0.3158035656
+    },
+    {
+      "symbol": "JIOFIN",
+      "name": "Jio Financial Services Ltd.",
+      "sector": "Financial Services",
+      "one_year_return": -0.2682708977,
+      "annualized_volatility": 0.2627776069,
+      "max_drawdown": -0.3277943465
+    },
+    {
+      "symbol": "HDFCBANK",
+      "name": "HDFC Bank Ltd.",
+      "sector": "Financial Services",
+      "one_year_return": -0.1482973661,
+      "annualized_volatility": 0.1999041826,
+      "max_drawdown": -0.2777668609
+    }
+  ],
+  "highestVolatility": [
+    {
+      "symbol": "TMPV",
+      "name": "Tata Motors Passenger Vehicles Ltd.",
+      "sector": "Automobile and Auto Components",
+      "one_year_return": -0.4925223351,
+      "annualized_volatility": 0.5079549676,
+      "max_drawdown": -0.5883252126
+    },
+    {
+      "symbol": "TRENT",
+      "name": "Trent Ltd.",
+      "sector": "Consumer Services",
+      "one_year_return": -0.3904262523,
+      "annualized_volatility": 0.4552874652,
+      "max_drawdown": -0.6026044418
+    },
+    {
+      "symbol": "SHRIRAMFIN",
+      "name": "Shriram Finance Ltd.",
+      "sector": "Financial Services",
+      "one_year_return": 0.6147934864,
+      "annualized_volatility": 0.350858961,
+      "max_drawdown": -0.2104834582
+    },
+    {
+      "symbol": "ADANIENT",
+      "name": "Adani Enterprises Ltd.",
+      "sector": "Metals & Mining",
+      "one_year_return": 0.2458111746,
+      "annualized_volatility": 0.3471578419,
+      "max_drawdown": -0.3428485709
+    },
+    {
+      "symbol": "ETERNAL",
+      "name": "Eternal Ltd.",
+      "sector": "Consumer Services",
+      "one_year_return": 0.0891511096,
+      "annualized_volatility": 0.3449495387,
+      "max_drawdown": -0.3913362806
+    },
+    {
+      "symbol": "INDIGO",
+      "name": "InterGlobe Aviation Ltd.",
+      "sector": "Services",
+      "one_year_return": -0.0582581209,
+      "annualized_volatility": 0.3284582087,
+      "max_drawdown": -0.3593534238
+    },
+    {
+      "symbol": "BAJFINANCE",
+      "name": "Bajaj Finance Ltd.",
+      "sector": "Financial Services",
+      "one_year_return": 0.1196944286,
+      "annualized_volatility": 0.2926358142,
+      "max_drawdown": -0.2674222098
+    },
+    {
+      "symbol": "INFY",
+      "name": "Infosys Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3399535821,
+      "annualized_volatility": 0.2867886215,
+      "max_drawdown": -0.4042956209
+    },
+    {
+      "symbol": "HINDALCO",
+      "name": "Hindalco Industries Ltd.",
+      "sector": "Metals & Mining",
+      "one_year_return": 0.4202515028,
+      "annualized_volatility": 0.2776901143,
+      "max_drawdown": -0.1826562998
+    },
+    {
+      "symbol": "M&M",
+      "name": "Mahindra & Mahindra Ltd.",
+      "sector": "Automobile and Auto Components",
+      "one_year_return": 0.0232279425,
+      "annualized_volatility": 0.2763353465,
+      "max_drawdown": -0.229144749
+    }
+  ],
+  "worstDrawdowns": [
+    {
+      "symbol": "TRENT",
+      "name": "Trent Ltd.",
+      "sector": "Consumer Services",
+      "one_year_return": -0.3904262523,
+      "annualized_volatility": 0.4552874652,
+      "max_drawdown": -0.6026044418
+    },
+    {
+      "symbol": "TMPV",
+      "name": "Tata Motors Passenger Vehicles Ltd.",
+      "sector": "Automobile and Auto Components",
+      "one_year_return": -0.4925223351,
+      "annualized_volatility": 0.5079549676,
+      "max_drawdown": -0.5883252126
+    },
+    {
+      "symbol": "INFY",
+      "name": "Infosys Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3399535821,
+      "annualized_volatility": 0.2867886215,
+      "max_drawdown": -0.4042956209
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3721318629,
+      "annualized_volatility": 0.2571949069,
+      "max_drawdown": -0.3960158402
+    },
+    {
+      "symbol": "ETERNAL",
+      "name": "Eternal Ltd.",
+      "sector": "Consumer Services",
+      "one_year_return": 0.0891511096,
+      "annualized_volatility": 0.3449495387,
+      "max_drawdown": -0.3913362806
+    },
+    {
+      "symbol": "HCLTECH",
+      "name": "HCL Technologies Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3065894957,
+      "annualized_volatility": 0.2693345116,
+      "max_drawdown": -0.3906107705
+    },
+    {
+      "symbol": "WIPRO",
+      "name": "Wipro Ltd.",
+      "sector": "Information Technology",
+      "one_year_return": -0.3210701952,
+      "annualized_volatility": 0.2526915102,
+      "max_drawdown": -0.3599503834
+    },
+    {
+      "symbol": "INDIGO",
+      "name": "InterGlobe Aviation Ltd.",
+      "sector": "Services",
+      "one_year_return": -0.0582581209,
+      "annualized_volatility": 0.3284582087,
+      "max_drawdown": -0.3593534238
+    },
+    {
+      "symbol": "ADANIENT",
+      "name": "Adani Enterprises Ltd.",
+      "sector": "Metals & Mining",
+      "one_year_return": 0.2458111746,
+      "annualized_volatility": 0.3471578419,
+      "max_drawdown": -0.3428485709
+    },
+    {
+      "symbol": "JIOFIN",
+      "name": "Jio Financial Services Ltd.",
+      "sector": "Financial Services",
+      "one_year_return": -0.2682708977,
+      "annualized_volatility": 0.2627776069,
+      "max_drawdown": -0.3277943465
+    }
+  ],
+  "sectorSummary": [
+    {
+      "sector": "Financial Services",
+      "symbols": 11,
+      "avg_return": 0.0291234536,
+      "avg_volatility": 0.2365321874,
+      "worst_drawdown": -0.3277943465,
+      "avg_volume": 10060034.656809054
+    },
+    {
+      "sector": "Automobile and Auto Components",
+      "symbols": 5,
+      "avg_return": 0.0437213157,
+      "avg_volatility": 0.3032238926,
+      "worst_drawdown": -0.5883252126,
+      "avg_volume": 3126155.2682730923
+    },
+    {
+      "sector": "Healthcare",
+      "symbols": 5,
+      "avg_return": 0.0429518743,
+      "avg_volatility": 0.2196484138,
+      "worst_drawdown": -0.2832411192,
+      "avg_volume": 1859489.987148594
+    },
+    {
+      "sector": "Information Technology",
+      "symbols": 5,
+      "avg_return": -0.2892425846,
+      "avg_volatility": 0.2677413741,
+      "worst_drawdown": -0.4042956209,
+      "avg_volume": 6992093.838554217
+    },
+    {
+      "sector": "Fast Moving Consumer Goods",
+      "symbols": 4,
+      "avg_return": -0.0252626376,
+      "avg_volatility": 0.2069956021,
+      "worst_drawdown": -0.3158035656,
+      "avg_volume": 5545291.376506025
+    },
+    {
+      "sector": "Metals & Mining",
+      "symbols": 4,
+      "avg_return": 0.2634245047,
+      "avg_volatility": 0.281004956,
+      "worst_drawdown": -0.3428485709,
+      "avg_volume": 9096111.454819277
+    },
+    {
+      "sector": "Oil Gas & Consumable Fuels",
+      "symbols": 3,
+      "avg_return": 0.0461409255,
+      "avg_volatility": 0.2179125174,
+      "worst_drawdown": -0.2266091214,
+      "avg_volume": 12070661.074966533
+    },
+    {
+      "sector": "Construction Materials",
+      "symbols": 2,
+      "avg_return": 0.0554049062,
+      "avg_volatility": 0.2186129483,
+      "worst_drawdown": -0.2060986822,
+      "avg_volume": 491177.4799196787
+    },
+    {
+      "sector": "Consumer Durables",
+      "symbols": 2,
+      "avg_return": 0.1816894291,
+      "avg_volatility": 0.2374780936,
+      "worst_drawdown": -0.2853966422,
+      "avg_volume": 1106343.341365462
+    },
+    {
+      "sector": "Consumer Services",
+      "symbols": 2,
+      "avg_return": -0.1506375713,
+      "avg_volatility": 0.400118502,
+      "worst_drawdown": -0.6026044418,
+      "avg_volume": 21046658.20883534
+    },
+    {
+      "sector": "Power",
+      "symbols": 2,
+      "avg_return": 0.0434095882,
+      "avg_volatility": 0.191438753,
+      "worst_drawdown": -0.1513895764,
+      "avg_volume": 11351622.389558233
+    },
+    {
+      "sector": "Services",
+      "symbols": 2,
+      "avg_return": 0.1266252471,
+      "avg_volatility": 0.299714463,
+      "worst_drawdown": -0.3593534238,
+      "avg_volume": 1899647.700374077
+    },
+    {
+      "sector": "Broad Market Index",
+      "symbols": 1,
+      "avg_return": -0.0400647858,
+      "avg_volatility": 0.130368967,
+      "worst_drawdown": -0.1518180937,
+      "avg_volume": 358388.5714285714
+    },
+    {
+      "sector": "Capital Goods",
+      "symbols": 1,
+      "avg_return": 0.02456604,
+      "avg_volatility": 0.2507360163,
+      "worst_drawdown": -0.1447326642,
+      "avg_volume": 14672742.10441767
+    },
+    {
+      "sector": "Construction",
+      "symbols": 1,
+      "avg_return": 0.1410421835,
+      "avg_volatility": 0.2499643755,
+      "worst_drawdown": -0.2434757106,
+      "avg_volume": 2190967.2730923695
+    },
+    {
+      "sector": "Telecommunication",
+      "symbols": 1,
+      "avg_return": -0.0437958519,
+      "avg_volatility": 0.1944390237,
+      "worst_drawdown": -0.1876820232,
+      "avg_volume": 7582575.518072289
+    }
+  ]
+}

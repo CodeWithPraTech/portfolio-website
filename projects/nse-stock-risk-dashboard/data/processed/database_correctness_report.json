@@ -1,0 +1,126 @@
+{
+  "generatedAt": "2026-07-06T08:50:45.863443+00:00",
+  "status": "pass",
+  "checksPassed": 15,
+  "checksFailed": 0,
+  "checks": [
+    {
+      "name": "clean_csv_exists",
+      "passed": true,
+      "detail": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\clean\\stock_prices.csv"
+    },
+    {
+      "name": "constituent_csv_exists",
+      "passed": true,
+      "detail": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\metadata\\nifty50_constituents.csv"
+    },
+    {
+      "name": "db_exists",
+      "passed": true,
+      "detail": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\database\\market_data.db"
+    },
+    {
+      "name": "row_count_matches_clean_csv",
+      "passed": true,
+      "detail": "csv=12694, db=12694"
+    },
+    {
+      "name": "symbol_count_is_51",
+      "passed": true,
+      "detail": "symbols=51"
+    },
+    {
+      "name": "nifty_stock_count_is_50",
+      "passed": true,
+      "detail": "constituents=50"
+    },
+    {
+      "name": "quality_issue_count_zero",
+      "passed": true,
+      "detail": "quality_issues=0"
+    },
+    {
+      "name": "corporate_actions_present",
+      "passed": true,
+      "detail": "corporate_actions=81"
+    },
+    {
+      "name": "no_missing_db_keys_vs_clean_csv",
+      "passed": true,
+      "detail": "missing=0"
+    },
+    {
+      "name": "no_extra_db_keys_vs_clean_csv",
+      "passed": true,
+      "detail": "extra=0"
+    },
+    {
+      "name": "price_values_match_clean_csv",
+      "passed": true,
+      "detail": "mismatched_rows=0"
+    },
+    {
+      "name": "all_constituents_seeded_in_symbols",
+      "passed": true,
+      "detail": "missing=0"
+    },
+    {
+      "name": "symbol_metadata_has_sector_and_isin",
+      "passed": true,
+      "detail": "missing=0"
+    },
+    {
+      "name": "no_duplicate_symbol_date_in_db",
+      "passed": true,
+      "detail": "duplicates=0"
+    },
+    {
+      "name": "no_invalid_ohlc_in_db",
+      "passed": true,
+      "detail": "invalid_ohlc=0"
+    }
+  ],
+  "database": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\database\\market_data.db",
+  "sourceFiles": {
+    "cleanPrices": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\clean\\stock_prices.csv",
+    "nifty50Constituents": "C:\\Users\\lapto\\OneDrive\\Documents\\Portfolio Website\\projects\\nse-stock-risk-dashboard\\data\\metadata\\nifty50_constituents.csv"
+  },
+  "shape": {
+    "cleanCsvRows": 12694,
+    "databaseRows": 12694,
+    "symbols": 51,
+    "dateStart": "2025-07-07",
+    "dateEnd": "2026-07-06",
+    "corporateActions": 81
+  },
+  "keyComparison": {
+    "cleanKeys": 12694,
+    "dbKeys": 12694,
+    "missingInDb": 0,
+    "extraInDb": 0,
+    "missingSample": [],
+    "extraSample": []
+  },
+  "valueComparison": {
+    "comparedRows": 12694,
+    "mismatchedRows": 0,
+    "maxAbsDiff": {
+      "Open": 2.2737367544323206e-13,
+      "High": 2.2737367544323206e-13,
+      "Low": 2.2737367544323206e-13,
+      "Close": 2.2737367544323206e-13,
+      "Adj Close": 2.2737367544323206e-13,
+      "Price Adjustment Factor": 1.1102230246251565e-16,
+      "Volume": 0.0
+    },
+    "mismatchSample": []
+  },
+  "symbolComparison": {
+    "constituents": 50,
+    "dbSymbols": 51,
+    "missingConstituents": 0,
+    "missingSample": [],
+    "missingSectorOrIsin": 0,
+    "missingSectorOrIsinSample": []
+  }
+}

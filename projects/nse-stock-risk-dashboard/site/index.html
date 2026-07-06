@@ -8,8 +8,40 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="hero" aria-label="Market Mind home">
-      <h1>Market Mind</h1>
+    <main class="page" aria-label="Market Mind home">
+      <header class="hero">
+        <h1>Market Mind</h1>
+        <div class="controls" aria-label="Data window">
+          <button class="active" type="button" data-lookback="6mo">6 months</button>
+          <button type="button" data-lookback="1y">1 year</button>
+        </div>
+      </header>
+
+      <section class="status-card" aria-live="polite">
+        <span id="status">Refreshing latest numbers...</span>
+      </section>
+
+      <section class="summary-grid">
+        <article>
+          <span>Latest date</span>
+          <strong id="latest-date">-</strong>
+        </article>
+        <article>
+          <span>Total rows</span>
+          <strong id="row-count">-</strong>
+        </article>
+        <article>
+          <span>Stocks</span>
+          <strong id="symbol-count">-</strong>
+        </article>
+        <article>
+          <span>Data issues</span>
+          <strong id="quality-issues">-</strong>
+        </article>
+      </section>
+
+      <section id="stock-grid" class="stock-grid"></section>
     </main>
+    <script type="module" src="app.js"></script>
   </body>
 </html>

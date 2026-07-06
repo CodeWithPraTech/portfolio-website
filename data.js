@@ -171,36 +171,35 @@ export const initialData = {
         dashboardGoal: "Stakeholders select an NSE stock, review risk, enter capital and trade plan, then receive a transparent decision label.",
         dataCard: {
           status: "Complete",
-          rows: 3621,
-          symbols: 6,
-          latestDate: "2026-06-10",
+          rows: 12694,
+          symbols: 51,
+          latestDate: "2026-07-06",
           qualityIssues: 0,
-          source: "Yahoo Finance chart API automated real-data fallback; NSE/NIFTY official pages documented as source-of-truth references.",
-          cleanData: "data/stock_market/clean/stock_prices.csv",
-          manifest: "data/stock_market/metadata/ingestion_manifest.json"
+          source: "Validated SQLite database with full NIFTY 50 one-year OHLCV, sector metadata, corporate actions, and raw-vs-adjusted price clarity.",
+          cleanData: "projects/nse-stock-risk-dashboard/data/clean/stock_prices.csv",
+          manifest: "projects/nse-stock-risk-dashboard/data/metadata/ingestion_manifest.json"
         },
         stocks: [
-          { symbol: "RELIANCE", name: "Reliance Industries", rows: 604, latestDate: "2026-06-10", status: "Chart Ready", nextView: "OHLC + MA detail" },
-          { symbol: "TCS", name: "Tata Consultancy Services", rows: 604, latestDate: "2026-06-10", status: "Chart Ready", nextView: "OHLC + MA detail" },
-          { symbol: "HDFCBANK", name: "HDFC Bank", rows: 604, latestDate: "2026-06-10", status: "Chart Ready", nextView: "OHLC + MA detail" },
-          { symbol: "INFY", name: "Infosys", rows: 604, latestDate: "2026-06-10", status: "Chart Ready", nextView: "OHLC + MA detail" },
-          { symbol: "ICICIBANK", name: "ICICI Bank", rows: 604, latestDate: "2026-06-10", status: "Chart Ready", nextView: "OHLC + MA detail" },
-          { symbol: "NIFTY50", name: "NIFTY 50 Benchmark", rows: 601, latestDate: "2026-06-10", status: "Benchmark Ready", nextView: "Benchmark OHLC detail" }
+          { symbol: "NIFTY50", name: "NIFTY 50 Benchmark", rows: 245, latestDate: "2026-07-06", status: "Benchmark Ready", nextView: "Market comparison" },
+          { symbol: "NIFTY 50", name: "Full constituent universe", rows: 12449, latestDate: "2026-07-06", status: "Data Complete", nextView: "Analytics in progress" },
+          { symbol: "ACTIONS", name: "Corporate actions", rows: 81, latestDate: "2026-07-06", status: "Tracked", nextView: "Adjusted-return logic" }
         ],
         featureRoadmap: [
           { name: "Data Card", status: "Complete", description: "Real-data source policy, schema, quality checks, and append strategy documented." },
           { name: "Continuous Data Pipeline", status: "Complete", description: "Incremental ingestion appends only missing rows and avoids duplicates." },
-          { name: "Stock List", status: "Complete", description: "Pilot universe appears on the project card with latest date and row coverage." },
+          { name: "Validated Database", status: "Complete", description: "SQLite database validates against clean ETL output and the official NIFTY 50 constituent source." },
+          { name: "Stock List", status: "Complete", description: "Full NIFTY 50 universe appears with sector, ISIN, corporate actions, and one-year daily coverage." },
           { name: "Candlestick Detail", status: "Complete", description: "Click a stock to show OHLC candlestick patterns, volume bars, MA20, MA50, and recent price movement." },
-          { name: "Risk Metrics", status: "Next", description: "Rolling volatility, drawdown, beta, correlation, and liquidity scores." },
+          { name: "EDA", status: "Complete", description: "Generated coverage, sector, returns, volatility, drawdown, and corporate-action profile from the database." },
+          { name: "Risk Metrics", status: "In Progress", description: "Rolling volatility, drawdown, beta, correlation, and liquidity scores." },
           { name: "Position Sizing", status: "Pending", description: "User enters capital, risk percent, entry, stop-loss, and target." },
           { name: "Decision Engine", status: "Pending", description: "Suggest Avoid, Watchlist, Small Position, Normal Position, or Reduce Risk with reasons." }
         ]
       },
       phases: [
         { name: "Business Understanding", status: "Complete", summary: "Defined investor risk problem, success criteria, risk KPIs, and target decision.", link: "https://app.notion.com/p/4b91558654a44529a605471420a44b24", linkLabel: "Open sprint" },
-        { name: "Data", status: "In Progress", summary: "Collect real OHLCV data, benchmark returns, manifest metadata, and incremental validation checks.", link: "https://app.notion.com/p/5609fc1688d540e4b33bee44aec7b708", linkLabel: "Open data sprint" },
-        { name: "Analytics", status: "Pending", summary: "Calculate returns, volatility, rolling risk, correlation, beta, max drawdown, VaR, and confidence intervals." },
+        { name: "Data", status: "Complete", summary: "Built and validated a SQLite data layer for full NIFTY 50 one-year OHLCV, benchmark data, sectors, corporate actions, and refresh logs.", link: "https://app.notion.com/p/5609fc1688d540e4b33bee44aec7b708", linkLabel: "Open data sprint" },
+        { name: "Analytics", status: "In Progress", summary: "EDA is complete; calculating returns, volatility, rolling risk, correlation, beta, max drawdown, VaR, and confidence intervals." },
         { name: "Information", status: "Pending", summary: "Convert statistical outputs into insight cards, risk levels, charts, and investor-friendly explanations." },
         { name: "Decision Making", status: "Pending", summary: "Define buy, hold, avoid, rebalance, or watchlist rules based on transparent risk thresholds." },
         { name: "Intervention", status: "Pending", summary: "Create alerts, stop-loss guidance, diversification suggestions, and a recruiter-ready dashboard case study." }
