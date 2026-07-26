@@ -10,7 +10,7 @@ if (-not $Python) {
 Push-Location $ProjectRoot
 try {
   $env:PYTHONPATH = $ProjectRoot
-  & $Python -m src.pipeline.run_etl --lookback 6mo
+  & $Python -m src.pipeline.run_etl --lookback 3y
 }
 finally {
   Pop-Location

@@ -55,7 +55,8 @@ const server = createServer(async (request, response) => {
 
 async function handleDashboardSummary(url, response) {
   try {
-    const lookback = url.searchParams.get("lookback") === "1y" ? "1y" : "6mo";
+    const requestedLookback = url.searchParams.get("lookback") || "3y";
+    const lookback = ["6mo", "1y", "3y"].includes(requestedLookback) ? requestedLookback : "3y";
     const payload = await runEtl(lookback);
     sendJson(response, 200, payload);
   } catch (error) {

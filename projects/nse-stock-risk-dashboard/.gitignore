@@ -1,0 +1,6 @@
+# Raw vendor snapshots are reproducible from the ETL and can grow quickly.
+data/raw/yahoo_finance/
+
+# Local runtime artifacts.
+__pycache__/
+*.pyc

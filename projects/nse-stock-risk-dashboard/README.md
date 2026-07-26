@@ -1,181 +1,221 @@
-# NSE Stock Risk Dashboard
+# Market Mind: NSE Stock Risk Intelligence
 
-This is a standalone stock-risk analytics project inside the portfolio workspace.
+Market Mind is a live, plain-language risk dashboard for the NIFTY 50. It turns daily and 30-minute market data into understandable answers about price behaviour, downside risk, market sensitivity, sector concentration, and position sizing.
 
-The project is now organized so it can grow like a real data product:
+The dashboard is educational. It describes measured historical evidence and does not issue buy or sell recommendations.
+
+## What The Product Does
+
+- Covers all 50 current NIFTY 50 constituents plus NIFTY 50 as the benchmark.
+- Stores three years of daily open, high, low, close, adjusted close, and volume.
+- Stores recent 30-minute candles where Yahoo Finance makes them available.
+- Shows a clickable candlestick detail view for every stock.
+- Measures volatility, drawdown, beta, correlation, historical tail loss, trading range, liquidity, trend, and momentum.
+- Compares sector-level risk across the NIFTY 50 universe.
+- Records dividends and splits and clearly separates raw from adjusted prices.
+- Provides a risk-based position-size illustration from a user-entered portfolio value and loss budget.
+- Accepts plain questions such as `Why is Reliance risky?`, `What do the signals say about TCS?`, or `Compare Infosys with Wipro`.
+- Explains each answer as `What`, `Why`, and `How to use it` using only the dashboard's measured signals.
+- Requests the latest available quote for the selected stock while keeping the full risk calculation reproducible from the stored dataset.
+
+## Product Screens
+
+The light-mode web application contains:
+
+1. **Ask the signals**: natural-language questions answered from transparent rules.
+2. **Market summary**: NIFTY level, breadth, returns, higher-risk count, and data health.
+3. **Risk monitor**: searchable and sortable coverage of all NIFTY 50 stocks.
+4. **Stock detail**: daily or 30-minute candlesticks, returns, risk measures, signal checks, and corporate actions.
+5. **Position-size planner**: an illustrative quantity based on a user-defined risk budget.
+6. **Sector risk map**: sector averages and member-level drill-down.
+7. **Method page**: plain-language definitions, coverage, assumptions, and limitations.
+
+## Architecture
+
+```text
+Official NIFTY universe + Yahoo Finance
+                  |
+                  v
+        Python ETL and validation
+                  |
+                  v
+        SQLite market_data.db
+                  |
+                  v
+       Risk analytics payload builder
+                  |
+                  v
+   Deployable Next/vinext web application
+                  |
+       +----------+-----------+
+       |                      |
+ stored risk evidence   latest quote endpoint
+```
+
+The stored analytics and live quote are deliberately separated. Historical risk metrics are reproducible and internally consistent; the latest quote may be delayed and does not silently rewrite the risk calculation.
+
+## Project Structure
 
 ```text
 nse-stock-risk-dashboard/
   data/
-    raw/
-    clean/
-    processed/
-    metadata/
-    database/
+    raw/                    Source snapshots
+    clean/                  Validated daily market file
+    processed/              Dashboard and validation outputs
+    metadata/               Universe, manifests, and quality reports
+    database/               SQLite database
   notebooks/
     01_data_exploration.ipynb
     02_risk_metrics.ipynb
     03_dashboard_prototype.ipynb
   src/
-    ingestion/
-      fetch_market_data.py
-      append_data.py
-    validation/
-      quality_checks.py
-    features/
-      risk_features.py
-      return_features.py
-    analytics/
-      volatility.py
-      drawdown.py
-      beta.py
-      correlation.py
-    dashboard/
-      app.py
-  reports/
-    data_card.md
-    methodology.md
-    stakeholder_summary.md
+    ingestion/              Market-data fetch helpers
+    validation/             Data-quality checks
+    features/               Return and risk feature preparation
+    analytics/              Risk calculations and web payload builder
+    database/               Schema, initialization, and queries
+    pipeline/               Daily and 30-minute ETL
+    dashboard/              Legacy local Python entry point
+  reports/                  Data card, methodology, validation, and stakeholder notes
+  docs/
+    PROJECT_DOCUMENTATION.md
   tools/
     daily_refresh.ps1
-  site/
-    index.html
-    styles.css
-    server.mjs
+  site/                     Earlier lightweight local interface
+  web/                      Production dashboard and deployment source
   README.md
 ```
 
-## Current Site
+## Data Coverage
 
-The current site is intentionally blank and light-mode. It only shows the name:
+Current validated snapshot:
 
-```text
-Market Mind
-```
+- Daily rows: `37,756`
+- Daily symbols: `51` including the NIFTY 50 benchmark
+- Daily range: `07 Jul 2023` to `06 Jul 2026`
+- Recent 30-minute rows: `25,895`
+- Corporate-action records: `243`
+- Stored data-quality issues: `0`
 
-This gives the project a clean starting point before choosing the final product direction.
+Run the database inspection at any time for current counts:
 
-## Run The Site
-
-From the portfolio workspace root:
-
-```bash
-node projects/nse-stock-risk-dashboard/site/server.mjs
-```
-
-Open:
-
-```text
-http://localhost:4184
-```
-
-Every page load calls the dashboard API, which refreshes the latest market data before showing numbers.
-
-Available windows:
-
-- `6 months`
-- `1 year`
-
-## Run The ETL Directly
-
-From the project root:
-
-```bash
-python -m src.pipeline.run_etl --lookback 6mo
-python -m src.pipeline.run_etl --lookback 1y
-python -m src.pipeline.run_intraday_etl --days 30
-```
-
-The ETL writes:
-
-- SQLite database: `data/database/market_data.db`
-- Clean OHLCV data: `data/clean/stock_prices.csv`
-- Dashboard summary: `data/processed/dashboard_summary.json`
-- Manifest: `data/metadata/ingestion_manifest.json`
-- Quality report: `data/metadata/data_quality_report.csv`
-- Raw snapshots: `data/raw/yahoo_finance/`
-
-## Database
-
-Create or update the database schema:
-
-```bash
-python -m src.database.init_db
-```
-
-Inspect current database status:
-
-```bash
+```powershell
 python -m src.database.inspect_db
 ```
 
-Main tables:
+## Run Locally
 
-- `symbols`: stock and benchmark universe
-- `market_prices`: daily OHLCV rows with source and fetch metadata
-- `market_intraday_prices`: 30-minute OHLCV candles with source and fetch metadata
-- `refresh_runs`: each daily/API refresh attempt
-- `refresh_symbol_counts`: rows fetched per symbol per run
-- `quality_issues`: validation issues found during refresh
+### 1. Refresh the analytics payload
 
-`symbols` stores `sector`, `industry`, and `nifty_sector_index` for each stock. `market_prices` uses `(symbol, trade_date)` as the primary key, so daily refreshes update existing rows and add new dates without duplicates.
+From the project directory:
 
-`market_intraday_prices` uses `(symbol, interval_start, interval_minutes)` as the primary key, so 30-minute refreshes update the active/recent candles and add new intervals without duplicates.
-
-## Daily Refresh
-
-Manual daily refresh command:
-
-```bash
-python -m src.pipeline.run_etl --lookback 6mo
+```powershell
+python -m src.analytics.build_dashboard_payload
 ```
 
-Windows PowerShell helper:
+### 2. Start the production web application
+
+```powershell
+cd web
+pnpm install
+pnpm dev -- --port 4184
+```
+
+Open `http://localhost:4184`.
+
+### 3. Refresh source data
+
+The full daily refresh can take several minutes because it covers 51 symbols:
+
+```powershell
+python -m src.pipeline.run_etl --lookback 3y
+python -m src.pipeline.run_intraday_etl --days 365
+python -m src.analytics.build_dashboard_payload
+```
+
+The Windows helper runs the daily pipeline:
 
 ```powershell
 .\tools\daily_refresh.ps1
 ```
 
-This script is ready to attach to Windows Task Scheduler for a daily run. The website API also triggers the same ETL when the dashboard is opened or refreshed.
+## Risk Measures
 
-## Full-Stack Entry Point
+| Measure | Plain meaning | Main use |
+|---|---|---|
+| Annualised volatility | How widely daily returns have moved | Compare price instability |
+| Maximum drawdown | Largest fall from a previous high | Understand historical downside depth |
+| Beta | Typical stock move when NIFTY moves by 1% | Measure market sensitivity |
+| Correlation | How consistently stock and NIFTY moved together | Understand diversification |
+| 95% historical bad-day estimate | Daily loss threshold exceeded about 5% of the time | Set loss expectations |
+| Expected shortfall | Average loss within the worst 5% of days | Understand tail severity |
+| ATR | Average daily trading range | Create a price-aware stop-distance illustration |
+| Liquidity | Average 20-day rupee trading value | Identify execution risk |
+| Signal score | Trend, momentum, relative strength, and risk buffer | Summarise current historical evidence |
 
-A Python dashboard server is also available:
+The risk score ranks each stock against the other NIFTY 50 constituents. A lower score means lower measured risk relative to this universe, not zero risk.
 
-```bash
-cd projects/nse-stock-risk-dashboard
-python src/dashboard/app.py
-```
+## Query Engine
 
-Current backend endpoint:
+The query engine is deterministic and explainable. It:
 
-```text
-GET /api/health
-GET /api/dashboard-summary?lookback=6mo
-GET /api/dashboard-summary?lookback=1y
-GET /api/intraday-30m?symbol=RELIANCE&limit=80
-GET /api/corporate-actions?symbol=ALL
-```
+1. Detects one or two stock names or symbols in the question.
+2. Detects whether the user is asking about risk, signals, comparison, or position sizing.
+3. Reads only the stored risk and signal values for those stocks.
+4. Produces a structured explanation:
+   - **What** the current evidence says.
+   - **Why** the score looks that way.
+   - **How** a person can use the information responsibly.
 
-Corporate-action handling:
+It does not invent news, fundamentals, target prices, or future returns.
 
-- Dividends and splits are stored in `corporate_actions`.
-- Daily prices store both `close` and `adj_close`.
-- `price_adjustment_factor = adj_close / close` makes raw-vs-adjusted clarity explicit.
-- Return and risk features should use `adj_close` by default; price display should use raw `close`.
+## Data And Price Rules
 
-## Data
+- Raw `close` is used for the price shown to the user.
+- Adjusted close is used for returns and risk calculations so dividends and splits do not create false jumps.
+- `price_adjustment_factor = adjusted close / raw close` makes the adjustment explicit.
+- Corporate actions are stored separately for review.
+- NIFTY 50 is the market benchmark for beta, correlation, and relative performance.
+- The live quote endpoint uses Yahoo Finance and may be delayed or temporarily unavailable.
 
-The project contains its own copy of the current market dataset:
+## Validation
 
-- Raw market files: `data/raw/`
-- Clean market file: `data/clean/stock_prices.csv`
-- Metadata and quality report: `data/metadata/`
-- Future feature tables: `data/processed/`
-- Nifty 50 universe source: `data/metadata/nifty50_constituents.csv`
+The ETL checks:
 
-The stock universe is loaded from the official NSE/Nifty Indices constituent CSV. The ETL also includes `NIFTY50` as the benchmark index.
+- required columns;
+- duplicate symbol/date keys;
+- missing or invalid close values;
+- high/low consistency;
+- negative volume;
+- per-symbol coverage;
+- source and fetch timestamps.
 
-## Current Site Behavior
+Database correctness evidence is in:
 
-The site keeps the name simple, then shows recent numbers after the refresh completes. This keeps the product direction flexible while proving the data pipeline works.
+- `reports/database_correctness_report.md`
+- `data/processed/database_correctness_report.json`
+- `data/metadata/data_quality_report.csv`
+
+## Important Limits
+
+- Historical behaviour does not guarantee future behaviour.
+- This product does not include valuation, earnings quality, balance-sheet risk, news, options data, or macro forecasts.
+- Yahoo Finance intraday history is limited by its free endpoint.
+- A stock can have a favourable signal and higher risk at the same time. Signal strength and risk are separate questions.
+- The position-size result is an illustration based on user inputs, not personalised financial advice.
+
+## Documentation
+
+The full product, data, analytics, operations, testing, and deployment document is available at [docs/PROJECT_DOCUMENTATION.md](docs/PROJECT_DOCUMENTATION.md).
+
+## Technology
+
+- Python, pandas, SQLite
+- Yahoo Finance market data
+- Next.js-compatible React application built with vinext
+- Cloudflare-compatible edge route for latest quotes
+- Git and GitHub for source control
+
+## License And Use
+
+Use the code for learning and portfolio demonstration. Check the terms of every upstream data source before commercial or redistribution use.

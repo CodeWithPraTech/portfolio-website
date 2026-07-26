@@ -1,0 +1,38 @@
+name: Refresh NSE dashboard data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 13 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/nse-stock-risk-dashboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/nse-stock-risk-dashboard/requirements.txt
+      - run: pip install -r requirements.txt
+      - run: python -m src.pipeline.run_etl --lookback 3y
+      - run: python -m src.pipeline.run_intraday_etl --days 365
+      - run: python -m src.analytics.build_dashboard_payload
+      - name: Commit the refreshed dashboard payload
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add projects/nse-stock-risk-dashboard/web/public/data/dashboard.json
+          git add projects/nse-stock-risk-dashboard/data/processed/dashboard_summary.json
+          git add projects/nse-stock-risk-dashboard/data/metadata/ingestion_manifest.json
+          git add projects/nse-stock-risk-dashboard/data/metadata/intraday_30m_summary.json
+          git diff --cached --quiet || git commit -m "Refresh NSE dashboard market data"
+          git push

@@ -2,7 +2,7 @@
 
 Examples:
 python -m src.pipeline.run_intraday_etl
-python -m src.pipeline.run_intraday_etl --days 30
+python -m src.pipeline.run_intraday_etl --days 365
 """
 
 from __future__ import annotations
@@ -33,6 +33,8 @@ from src.database.db import (  # noqa: E402
 
 
 INTERVAL_MINUTES = 30
+DEFAULT_INTRADAY_DAYS = 365
+YAHOO_INTRADAY_FALLBACK_DAYS = 59
 FIELDS = [
     "Interval Start",
     "Interval End",
@@ -58,11 +60,16 @@ def main() -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Refresh 30-minute NSE intraday candles.")
-    parser.add_argument("--days", type=int, default=30, help="Recent calendar days to request. Yahoo may limit intraday history.")
+    parser.add_argument(
+        "--days",
+        type=int,
+        default=DEFAULT_INTRADAY_DAYS,
+        help="Recent calendar days to request. Default is 365, but Yahoo may return less intraday history.",
+    )
     return parser.parse_args()
 
 
-def run_intraday_etl(days: int = 30) -> dict:
+def run_intraday_etl(days: int = DEFAULT_INTRADAY_DAYS) -> dict:
     end_at = datetime.now(timezone.utc)
     start_at = end_at - timedelta(days=days)
     fetch_timestamp = end_at.isoformat()
@@ -79,9 +86,28 @@ def run_intraday_etl(days: int = 30) -> dict:
     try:
         rows = []
         fetched_counts = {}
+        fetch_errors = {}
+        fetch_warnings = {}
         for symbol, ticker in SYMBOLS.items():
             source_url = yahoo_intraday_url(ticker, start_at, end_at)
-            symbol_rows = fetch_yahoo_intraday_rows(symbol, ticker, source_url, fetch_timestamp)
+            try:
+                symbol_rows = fetch_yahoo_intraday_rows(symbol, ticker, source_url, fetch_timestamp)
+            except Exception as error:
+                if days > YAHOO_INTRADAY_FALLBACK_DAYS and is_provider_range_error(error):
+                    fallback_start_at = end_at - timedelta(days=YAHOO_INTRADAY_FALLBACK_DAYS)
+                    fallback_url = yahoo_intraday_url(ticker, fallback_start_at, end_at)
+                    try:
+                        symbol_rows = fetch_yahoo_intraday_rows(symbol, ticker, fallback_url, fetch_timestamp)
+                        fetch_warnings[symbol] = (
+                            f"Requested {days} days failed with provider range error; "
+                            f"used {YAHOO_INTRADAY_FALLBACK_DAYS} days instead."
+                        )
+                    except Exception as fallback_error:
+                        symbol_rows = []
+                        fetch_errors[symbol] = str(fallback_error)
+                else:
+                    symbol_rows = []
+                    fetch_errors[symbol] = str(error)
             fetched_counts[symbol] = len(symbol_rows)
             rows.extend(symbol_rows)
             write_raw_snapshot(symbol, fetch_timestamp, symbol_rows)
@@ -96,9 +122,19 @@ def run_intraday_etl(days: int = 30) -> dict:
             datetime.now(timezone.utc).isoformat(),
             len(rows),
             rows_upserted,
-            0,
+            len(fetch_errors),
+            "; ".join(f"{symbol}: {error}" for symbol, error in fetch_errors.items()) or None,
         )
-        summary = build_intraday_summary(connection, rows, fetched_counts, days, run_id, fetch_timestamp)
+        summary = build_intraday_summary(
+            connection,
+            rows,
+            fetched_counts,
+            fetch_errors,
+            fetch_warnings,
+            days,
+            run_id,
+            fetch_timestamp,
+        )
         summary_path = METADATA_DIR / "intraday_30m_summary.json"
         summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
         return summary
@@ -134,7 +170,16 @@ def fetch_yahoo_intraday_rows(symbol: str, ticker: str, source_url: str, fetch_t
     with urlopen(request, timeout=45) as response:
         payload = json.loads(response.read().decode("utf-8"))
 
-    result = payload.get("chart", {}).get("result", [{}])[0]
+    chart = payload.get("chart", {})
+    error = chart.get("error")
+    if error:
+        raise RuntimeError(error.get("description") or error.get("code") or "Yahoo Finance chart error")
+
+    results = chart.get("result") or []
+    if not results:
+        raise RuntimeError("Yahoo Finance returned no intraday result")
+
+    result = results[0]
     timestamps = result.get("timestamp") or []
     quote = (result.get("indicators", {}).get("quote") or [{}])[0]
     rows = []
@@ -163,6 +208,11 @@ def fetch_yahoo_intraday_rows(symbol: str, ticker: str, source_url: str, fetch_t
     return rows
 
 
+def is_provider_range_error(error: Exception) -> bool:
+    message = str(error)
+    return "HTTP Error 422" in message or "range" in message.lower()
+
+
 def value_at(container: dict, key: str, index: int):
     values = container.get(key) or []
     return values[index] if index < len(values) else None
@@ -188,7 +238,16 @@ def dedupe_rows(rows: list[dict]) -> list[dict]:
     return list(by_key.values())
 
 
-def build_intraday_summary(connection, rows: list[dict], fetched_counts: dict, days: int, run_id: int, fetch_timestamp: str) -> dict:
+def build_intraday_summary(
+    connection,
+    rows: list[dict],
+    fetched_counts: dict,
+    fetch_errors: dict,
+    fetch_warnings: dict,
+    days: int,
+    run_id: int,
+    fetch_timestamp: str,
+) -> dict:
     counts = database_counts(connection)
     latest_rows = [
         dict(row)
@@ -208,6 +267,11 @@ def build_intraday_summary(connection, rows: list[dict], fetched_counts: dict, d
         "refreshedAt": fetch_timestamp,
         "rowsFetched": len(rows),
         "fetchedRows": fetched_counts,
+        "fetchErrorCount": len(fetch_errors),
+        "fetchErrors": fetch_errors,
+        "fetchWarningCount": len(fetch_warnings),
+        "fetchWarnings": fetch_warnings,
+        "fallbackDays": YAHOO_INTRADAY_FALLBACK_DAYS if fetch_warnings else None,
         "databaseRunId": run_id,
         **counts,
         "latest": latest_rows,

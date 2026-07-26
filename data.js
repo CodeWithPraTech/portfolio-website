@@ -158,51 +158,52 @@ export const initialData = {
       problem: "Investors often look at returns without understanding volatility, drawdowns, correlation risk, and downside exposure.",
       dataset: "OHLCV stock data, adjusted close prices, benchmark index returns, sector metadata, and optional portfolio weights.",
       architecture: "Business Understanding -> Data -> Analytics -> Information -> Decision Making -> Intervention.",
-      stack: ["Python", "Pandas", "NumPy", "SciPy", "Statsmodels", "Plotly", "Streamlit"],
-      metrics: "Volatility, rolling standard deviation, beta, correlation, max drawdown, VaR, confidence intervals, and risk score.",
-      demo: "projects/nse-stock-risk-dashboard/site/index.html",
-      github: "https://github.com/yourusername/stock-volatility-risk-dashboard",
+      stack: ["Python", "Pandas", "SQLite", "React", "Next.js", "Cloudflare"],
+      metrics: "Volatility, beta, correlation, max drawdown, VaR, expected shortfall, liquidity, ATR, signal score, and position size.",
+      demo: "https://market-mind-nse-risk.loginwithpratikpatil.chatgpt.site",
+      github: "https://github.com/CodeWithPraTech/portfolio-website/tree/main/projects/nse-stock-risk-dashboard",
       notion: "https://app.notion.com/p/7c2d9bb6b1284817a46d2a28c5de79d2",
       lessons: "This project demonstrates statistical risk thinking, business decision thresholds, and intervention design rather than naive stock price prediction.",
       product: {
         name: "NSE Stock Risk Intelligence Dashboard",
         projectPath: "projects/nse-stock-risk-dashboard",
-        siteUrl: "projects/nse-stock-risk-dashboard/site/index.html",
-        dashboardGoal: "Stakeholders select an NSE stock, review risk, enter capital and trade plan, then receive a transparent decision label.",
+        siteUrl: "https://market-mind-nse-risk.loginwithpratikpatil.chatgpt.site",
+        dashboardGoal: "Users ask a plain-language stock question, inspect the measured risk and signals, explore the price chart, and plan position size from a loss budget.",
         dataCard: {
           status: "Complete",
-          rows: 12694,
+          rows: 37756,
           symbols: 51,
           latestDate: "2026-07-06",
           qualityIssues: 0,
-          source: "Validated SQLite database with full NIFTY 50 one-year OHLCV, sector metadata, corporate actions, and raw-vs-adjusted price clarity.",
+          source: "Validated SQLite database with full NIFTY 50 three-year daily OHLCV, recent 30-minute candles, sector metadata, corporate actions, and raw-vs-adjusted price clarity.",
           cleanData: "projects/nse-stock-risk-dashboard/data/clean/stock_prices.csv",
           manifest: "projects/nse-stock-risk-dashboard/data/metadata/ingestion_manifest.json"
         },
         stocks: [
-          { symbol: "NIFTY50", name: "NIFTY 50 Benchmark", rows: 245, latestDate: "2026-07-06", status: "Benchmark Ready", nextView: "Market comparison" },
-          { symbol: "NIFTY 50", name: "Full constituent universe", rows: 12449, latestDate: "2026-07-06", status: "Data Complete", nextView: "Analytics in progress" },
-          { symbol: "ACTIONS", name: "Corporate actions", rows: 81, latestDate: "2026-07-06", status: "Tracked", nextView: "Adjusted-return logic" }
+          { symbol: "NIFTY50", name: "NIFTY 50 Benchmark", rows: 737, latestDate: "2026-07-06", status: "Benchmark Ready", nextView: "Market comparison" },
+          { symbol: "NIFTY 50", name: "Full constituent universe", rows: 37019, latestDate: "2026-07-06", status: "Analytics Complete", nextView: "Live dashboard" },
+          { symbol: "30M", name: "Recent intraday candles", rows: 25895, latestDate: "2026-07-06", status: "Chart Ready", nextView: "30-minute detail" },
+          { symbol: "ACTIONS", name: "Corporate actions", rows: 243, latestDate: "2026-07-06", status: "Tracked", nextView: "Adjusted-return logic" }
         ],
         featureRoadmap: [
           { name: "Data Card", status: "Complete", description: "Real-data source policy, schema, quality checks, and append strategy documented." },
           { name: "Continuous Data Pipeline", status: "Complete", description: "Incremental ingestion appends only missing rows and avoids duplicates." },
           { name: "Validated Database", status: "Complete", description: "SQLite database validates against clean ETL output and the official NIFTY 50 constituent source." },
-          { name: "Stock List", status: "Complete", description: "Full NIFTY 50 universe appears with sector, ISIN, corporate actions, and one-year daily coverage." },
+          { name: "Stock List", status: "Complete", description: "Full NIFTY 50 universe appears with sector, ISIN, corporate actions, and three-year daily coverage." },
           { name: "Candlestick Detail", status: "Complete", description: "Click a stock to show OHLC candlestick patterns, volume bars, MA20, MA50, and recent price movement." },
           { name: "EDA", status: "Complete", description: "Generated coverage, sector, returns, volatility, drawdown, and corporate-action profile from the database." },
-          { name: "Risk Metrics", status: "In Progress", description: "Rolling volatility, drawdown, beta, correlation, and liquidity scores." },
-          { name: "Position Sizing", status: "Pending", description: "User enters capital, risk percent, entry, stop-loss, and target." },
-          { name: "Decision Engine", status: "Pending", description: "Suggest Avoid, Watchlist, Small Position, Normal Position, or Reduce Risk with reasons." }
+          { name: "Risk Metrics", status: "Complete", description: "Volatility, drawdown, beta, correlation, VaR, expected shortfall, liquidity, ATR, and relative risk scores." },
+          { name: "Position Sizing", status: "Complete", description: "User enters portfolio value and risk percent to calculate an ATR-aware illustrative quantity." },
+          { name: "Decision Engine", status: "Complete", description: "Plain-language What, Why, and How explanations use transparent trend, momentum, market, and risk signals." }
         ]
       },
       phases: [
         { name: "Business Understanding", status: "Complete", summary: "Defined investor risk problem, success criteria, risk KPIs, and target decision.", link: "https://app.notion.com/p/4b91558654a44529a605471420a44b24", linkLabel: "Open sprint" },
-        { name: "Data", status: "Complete", summary: "Built and validated a SQLite data layer for full NIFTY 50 one-year OHLCV, benchmark data, sectors, corporate actions, and refresh logs.", link: "https://app.notion.com/p/5609fc1688d540e4b33bee44aec7b708", linkLabel: "Open data sprint" },
-        { name: "Analytics", status: "In Progress", summary: "EDA is complete; calculating returns, volatility, rolling risk, correlation, beta, max drawdown, VaR, and confidence intervals." },
-        { name: "Information", status: "Pending", summary: "Convert statistical outputs into insight cards, risk levels, charts, and investor-friendly explanations." },
-        { name: "Decision Making", status: "Pending", summary: "Define buy, hold, avoid, rebalance, or watchlist rules based on transparent risk thresholds." },
-        { name: "Intervention", status: "Pending", summary: "Create alerts, stop-loss guidance, diversification suggestions, and a recruiter-ready dashboard case study." }
+        { name: "Data", status: "Complete", summary: "Built and validated a SQLite data layer for full NIFTY 50 three-year OHLCV, recent intraday data, benchmark data, sectors, corporate actions, and refresh logs.", link: "https://app.notion.com/p/5609fc1688d540e4b33bee44aec7b708", linkLabel: "Open data sprint" },
+        { name: "Analytics", status: "Complete", summary: "Calculated returns, volatility, correlation, beta, drawdown, tail loss, liquidity, ATR, sector risk, and calibrated scores." },
+        { name: "Information", status: "Complete", summary: "Converted analytics into interactive candlesticks, risk panels, sector views, data health, and plain-language explanations." },
+        { name: "Decision Making", status: "Complete", summary: "Built transparent trend, momentum, market-relative, comparison, and position-size decision support." },
+        { name: "Intervention", status: "Complete", summary: "Published a live recruiter-ready dashboard with on-demand quote refresh and a scheduled data-refresh workflow." }
       ]
     },
     {

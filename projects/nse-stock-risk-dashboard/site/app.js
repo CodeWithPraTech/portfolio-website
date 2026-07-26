@@ -1,4 +1,4 @@
-let lookback = "6mo";
+let lookback = "3y";
 
 const status = document.querySelector("#status");
 const latestDate = document.querySelector("#latest-date");
@@ -19,7 +19,7 @@ buttons.forEach((button) => {
 refreshDashboard();
 
 async function refreshDashboard() {
-  status.textContent = `Refreshing ${lookback === "1y" ? "1 year" : "6 months"} of latest numbers...`;
+  status.textContent = `Refreshing ${formatLookbackLabel(lookback)} of latest numbers...`;
   stockGrid.innerHTML = "";
 
   try {
@@ -35,7 +35,7 @@ async function refreshDashboard() {
 }
 
 function renderSummary(payload) {
-  status.textContent = `Updated ${formatDateTime(payload.refreshedAt)}. Showing ${payload.lookback === "1y" ? "1 year" : "6 months"}.`;
+  status.textContent = `Updated ${formatDateTime(payload.refreshedAt)}. Showing ${formatLookbackLabel(payload.lookback)}.`;
   latestDate.textContent = payload.latestDate || "-";
   rowCount.textContent = formatNumber(payload.rowCount);
   symbolCount.textContent = formatNumber(payload.symbolCount);
@@ -81,6 +81,12 @@ function formatDateTime(value) {
     dateStyle: "medium",
     timeStyle: "short"
   }).format(new Date(value));
+}
+
+function formatLookbackLabel(value) {
+  if (value === "3y") return "3 years";
+  if (value === "1y") return "1 year";
+  return "6 months";
 }
 
 function formatNumber(value) {

@@ -3,6 +3,7 @@
 Examples:
 python -m src.pipeline.run_etl --lookback 6mo
 python -m src.pipeline.run_etl --lookback 1y
+python -m src.pipeline.run_etl --lookback 3y
 """
 
 from __future__ import annotations
@@ -63,6 +64,12 @@ FIELDS = [
     "Fetch Timestamp",
 ]
 
+LOOKBACK_DAYS = {
+    "6mo": 183,
+    "1y": 365,
+    "3y": 365 * 3,
+}
+
 
 def main() -> None:
     args = parse_args()
@@ -72,11 +79,16 @@ def main() -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Refresh NSE dashboard data.")
-    parser.add_argument("--lookback", default="6mo", choices=["6mo", "1y"], help="Window to keep in the clean dashboard dataset.")
+    parser.add_argument(
+        "--lookback",
+        default="3y",
+        choices=sorted(LOOKBACK_DAYS),
+        help="Window to keep in the clean dashboard dataset. Use 3y for professional risk analytics.",
+    )
     return parser.parse_args()
 
 
-def run_etl(lookback: str = "6mo") -> dict:
+def run_etl(lookback: str = "3y") -> dict:
     ensure_dirs()
     end_day = date.today()
     start_day = start_for_lookback(end_day, lookback)
@@ -95,9 +107,16 @@ def run_etl(lookback: str = "6mo") -> dict:
         for symbol, ticker in SYMBOLS.items():
             source_url = yahoo_chart_url(ticker, start_day, end_day)
             try:
-                symbol_rows, symbol_actions = fetch_yahoo_rows(symbol, ticker, start_day, end_day, fetch_timestamp, source_url)
+                symbol_rows, symbol_actions = fetch_yahoo_rows_with_retry(
+                    symbol,
+                    ticker,
+                    start_day,
+                    end_day,
+                    fetch_timestamp,
+                    source_url,
+                )
             except Exception as error:
-                symbol_rows = []
+                symbol_rows = load_existing_market_rows(connection, symbol, start_day, end_day, fetch_timestamp)
                 symbol_actions = []
                 fetch_errors[symbol] = str(error)
             fetched_counts[symbol] = len(symbol_rows)
@@ -171,9 +190,7 @@ def ensure_dirs() -> None:
 
 
 def start_for_lookback(end_day: date, lookback: str) -> date:
-    if lookback == "1y":
-        return end_day - timedelta(days=365)
-    return end_day - timedelta(days=183)
+    return end_day - timedelta(days=LOOKBACK_DAYS[lookback])
 
 
 def base_manifest(lookback: str, start_day: date, end_day: date, fetch_timestamp: str) -> dict:
@@ -236,6 +253,58 @@ def fetch_yahoo_rows(symbol: str, ticker: str, start_day: date, end_day: date, f
             "Fetch Timestamp": fetch_timestamp,
         })
     return rows, parse_corporate_actions(symbol, events, source_url, fetch_timestamp)
+
+
+def fetch_yahoo_rows_with_retry(
+    symbol: str,
+    ticker: str,
+    start_day: date,
+    end_day: date,
+    fetch_timestamp: str,
+    source_url: str,
+    attempts: int = 3,
+) -> tuple[list[dict], list[dict]]:
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        try:
+            return fetch_yahoo_rows(symbol, ticker, start_day, end_day, fetch_timestamp, source_url)
+        except Exception as error:
+            last_error = error
+            if attempt < attempts:
+                time.sleep(1.5 * attempt)
+    raise last_error
+
+
+def load_existing_market_rows(connection, symbol: str, start_day: date, end_day: date, fetch_timestamp: str) -> list[dict]:
+    rows = connection.execute(
+        """
+        SELECT symbol, trade_date, ticker, open, high, low, close, adj_close,
+               price_adjustment_factor, volume, source, source_url
+        FROM market_prices
+        WHERE symbol = ?
+          AND trade_date BETWEEN ? AND ?
+        ORDER BY trade_date
+        """,
+        (symbol, start_day.isoformat(), end_day.isoformat()),
+    ).fetchall()
+    return [
+        {
+            "Date": row["trade_date"],
+            "Symbol": row["symbol"],
+            "Ticker": row["ticker"],
+            "Open": row["open"],
+            "High": row["high"],
+            "Low": row["low"],
+            "Close": row["close"],
+            "Adj Close": row["adj_close"],
+            "Price Adjustment Factor": row["price_adjustment_factor"],
+            "Volume": row["volume"],
+            "Source": row["source"],
+            "Source URL": row["source_url"],
+            "Fetch Timestamp": fetch_timestamp,
+        }
+        for row in rows
+    ]
 
 
 def parse_corporate_actions(symbol: str, events: dict, source_url: str, fetch_timestamp: str) -> list[dict]:
