@@ -2,365 +2,365 @@
   "source": "Yahoo Finance automated fallback for NSE tickers",
   "source_note": "Official NSE pages remain the source-of-truth reference; Yahoo Finance is used for reproducible automated refreshes.",
   "lookback": "3y",
-  "window_start": "2023-08-08",
-  "window_end": "2026-08-07",
-  "last_refresh_timestamp": "2026-08-07T14:32:34.332274+00:00",
+  "window_start": "2023-08-11",
+  "window_end": "2026-08-10",
+  "last_refresh_timestamp": "2026-08-10T14:36:34.223783+00:00",
   "symbols": {
     "ADANIENT": {
       "ticker": "ADANIENT.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "ADANIPORTS": {
       "ticker": "ADANIPORTS.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "APOLLOHOSP": {
       "ticker": "APOLLOHOSP.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "ASIANPAINT": {
       "ticker": "ASIANPAINT.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "AXISBANK": {
       "ticker": "AXISBANK.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "BAJAJ-AUTO": {
       "ticker": "BAJAJ-AUTO.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "BAJFINANCE": {
       "ticker": "BAJFINANCE.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "BAJAJFINSV": {
       "ticker": "BAJAJFINSV.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "BEL": {
       "ticker": "BEL.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "BHARTIARTL": {
       "ticker": "BHARTIARTL.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "CIPLA": {
       "ticker": "CIPLA.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "COALINDIA": {
       "ticker": "COALINDIA.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "DRREDDY": {
       "ticker": "DRREDDY.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "EICHERMOT": {
       "ticker": "EICHERMOT.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "ETERNAL": {
       "ticker": "ETERNAL.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "GRASIM": {
       "ticker": "GRASIM.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "HCLTECH": {
       "ticker": "HCLTECH.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "HDFCBANK": {
       "ticker": "HDFCBANK.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "HDFCLIFE": {
       "ticker": "HDFCLIFE.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "HINDALCO": {
       "ticker": "HINDALCO.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "HINDUNILVR": {
       "ticker": "HINDUNILVR.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "ICICIBANK": {
       "ticker": "ICICIBANK.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "ITC": {
       "ticker": "ITC.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "INFY": {
       "ticker": "INFY.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "INDIGO": {
       "ticker": "INDIGO.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "JSWSTEEL": {
       "ticker": "JSWSTEEL.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "JIOFIN": {
       "ticker": "JIOFIN.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 735,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 736,
       "source": "Yahoo Finance automated fallback"
     },
     "KOTAKBANK": {
       "ticker": "KOTAKBANK.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "LT": {
       "ticker": "LT.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "M&M": {
       "ticker": "M&M.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "MARUTI": {
       "ticker": "MARUTI.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "MAXHEALTH": {
       "ticker": "MAXHEALTH.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "NTPC": {
       "ticker": "NTPC.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "NESTLEIND": {
       "ticker": "NESTLEIND.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "ONGC": {
       "ticker": "ONGC.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "POWERGRID": {
       "ticker": "POWERGRID.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "RELIANCE": {
       "ticker": "RELIANCE.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "SBILIFE": {
       "ticker": "SBILIFE.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "SHRIRAMFIN": {
       "ticker": "SHRIRAMFIN.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "SBIN": {
       "ticker": "SBIN.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "SUNPHARMA": {
       "ticker": "SUNPHARMA.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "TCS": {
       "ticker": "TCS.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "TATACONSUM": {
       "ticker": "TATACONSUM.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "TMPV": {
       "ticker": "TMPV.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "TATASTEEL": {
       "ticker": "TATASTEEL.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "TECHM": {
       "ticker": "TECHM.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "TITAN": {
       "ticker": "TITAN.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "TRENT": {
       "ticker": "TRENT.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "ULTRACEMCO": {
       "ticker": "ULTRACEMCO.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 742,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 740,
       "source": "Yahoo Finance automated fallback"
     },
     "WIPRO": {
       "ticker": "WIPRO.NS",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 743,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 741,
       "source": "Yahoo Finance automated fallback"
     },
     "NIFTY50": {
       "ticker": "^NSEI",
-      "last_successful_date": "2026-08-07",
-      "last_fetch_timestamp": "2026-08-07T14:32:34.332274+00:00",
-      "rows": 739,
+      "last_successful_date": "2026-08-10",
+      "last_fetch_timestamp": "2026-08-10T14:36:34.223783+00:00",
+      "rows": 737,
       "source": "Yahoo Finance automated fallback"
     }
   }
