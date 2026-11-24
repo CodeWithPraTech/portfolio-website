@@ -2,7 +2,7 @@
   "status": "ok",
   "interval": "30m",
   "requestedDays": 365,
-  "refreshedAt": "2026-11-24T01:08:02.962714+00:00",
+  "refreshedAt": "2026-11-24T23:11:54.614317+00:00",
   "rowsFetched": 25101,
   "fetchedRows": {
     "ADANIENT": 494,
@@ -116,11 +116,11 @@
   "fallbackDays": 59,
   "databaseRunId": 14,
   "databasePath": "/home/runner/work/portfolio-website/portfolio-website/projects/nse-stock-risk-dashboard/data/database/market_data.db",
-  "databaseRows": 42601,
+  "databaseRows": 42652,
   "databaseIntradayRows": 50996,
   "databaseCorporateActions": 279,
   "databaseSymbols": 51,
-  "databaseLatestDate": "2026-11-20",
+  "databaseLatestDate": "2026-11-23",
   "databaseLatestIntraday": "2026-11-23T10:00:00+00:00",
   "latest": [
     {
